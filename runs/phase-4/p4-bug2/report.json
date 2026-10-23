@@ -1,0 +1,95 @@
+{
+  "run_id": "p4-bug2",
+  "timestamp": "2026-10-23T07:25:50.966918+00:00",
+  "target_app": "demo-app",
+  "bug_number": 2,
+  "status": "PASSED",
+  "stability_score": "5/5 (100%)",
+  "original_signature": [
+    [
+      "cross_concept_overlap",
+      "modal dialog"
+    ]
+  ],
+  "root_cause": {
+    "hypothesis": "Modal rendered inside container with transform creating stacking context",
+    "files": [
+      {
+        "path": "demo-app/src/components/Board.tsx",
+        "lines": "all",
+        "why": "root cause"
+      }
+    ],
+    "evidence": [
+      {
+        "source": "probe",
+        "ref": "bug-2 telemetry",
+        "t_ms": 500.0
+      }
+    ],
+    "falsifiable_check": "Apply patch for demo-app/src/components/Board.tsx",
+    "confidence": 0.96
+  },
+  "patch": {
+    "branch": "chronolens/fix-p4-bug2",
+    "rationale": "Removed `transform: translateZ(0)` on the board container which previously created a local stacking context trapping the modal dialog under the sticky navigation bar.",
+    "diff": "--- a/demo-app/src/components/Board.tsx\n+++ b/demo-app/src/components/Board.tsx\n@@ -43,6 +43,4 @@\n-  // Bug 2: the board container gets a transform that creates a new stacking context\n-  const boardContainerStyle: React.CSSProperties = cfg.bug2\n-    ? { transform: 'translateZ(0)' }\n-    : {};\n+  // Modal is rendered in document root or without trapping stacking context\n+  const boardContainerStyle: React.CSSProperties = {};\n",
+    "tests_pass": true,
+    "lint_pass": true
+  },
+  "verification": {
+    "passed": true,
+    "runs": 5,
+    "passes": 5,
+    "median_shape_iou": 1.0,
+    "signature_absent_in_all": true,
+    "new_anomaly_types": [],
+    "run_details": [
+      {
+        "run_index": 1,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 746
+      },
+      {
+        "run_index": 2,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 746
+      },
+      {
+        "run_index": 3,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 760
+      },
+      {
+        "run_index": 4,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 778
+      },
+      {
+        "run_index": 5,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 753
+      }
+    ]
+  }
+}

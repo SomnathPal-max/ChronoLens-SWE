@@ -1,0 +1,800 @@
+{
+  "run_id": "p4-bug3",
+  "timestamp": "2026-10-23T07:26:27.749583+00:00",
+  "bug_number": 3,
+  "fps": 30,
+  "frame_count": 90,
+  "duration_s": 3.0,
+  "anomalies": [],
+  "root_cause": {
+    "hypothesis": "Add Card button has fixed width of 120px with white-space: nowrap causing clipping",
+    "files": [
+      {
+        "path": "demo-app/src/components/Column.tsx",
+        "lines": "all",
+        "why": "root cause"
+      }
+    ],
+    "evidence": [
+      {
+        "source": "probe",
+        "ref": "bug-3 telemetry",
+        "t_ms": 500.0
+      }
+    ],
+    "falsifiable_check": "Apply patch for demo-app/src/components/Column.tsx"
+  },
+  "patch": {
+    "branch": "chronolens/fix-p4-bug3",
+    "rationale": "Removed fixed `120px` width constraint and `white-space: nowrap` on the Add Card button, allowing responsive sizing without text clipping at narrow viewports."
+  },
+  "verification": {
+    "passed": false,
+    "stability_score": "0/5",
+    "median_shape_iou": 1.0
+  },
+  "frames": [
+    {
+      "frame_index": 0,
+      "t_ms": 0.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 1,
+      "t_ms": 33.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 2,
+      "t_ms": 66.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 3,
+      "t_ms": 100.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 4,
+      "t_ms": 133.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 5,
+      "t_ms": 166.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 6,
+      "t_ms": 200.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 7,
+      "t_ms": 233.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 8,
+      "t_ms": 266.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 9,
+      "t_ms": 300.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 10,
+      "t_ms": 333.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 11,
+      "t_ms": 366.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 12,
+      "t_ms": 400.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 13,
+      "t_ms": 433.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 14,
+      "t_ms": 466.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 15,
+      "t_ms": 500.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 16,
+      "t_ms": 533.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 17,
+      "t_ms": 566.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 18,
+      "t_ms": 600.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 19,
+      "t_ms": 633.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 20,
+      "t_ms": 666.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 21,
+      "t_ms": 700.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 22,
+      "t_ms": 733.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": [
+        {
+          "source": "probe",
+          "ref": "bug-3 telemetry",
+          "t_ms": 500.0
+        }
+      ]
+    },
+    {
+      "frame_index": 23,
+      "t_ms": 766.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": [
+        {
+          "source": "probe",
+          "ref": "bug-3 telemetry",
+          "t_ms": 500.0
+        }
+      ]
+    },
+    {
+      "frame_index": 24,
+      "t_ms": 800.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": [
+        {
+          "source": "probe",
+          "ref": "bug-3 telemetry",
+          "t_ms": 500.0
+        }
+      ]
+    },
+    {
+      "frame_index": 25,
+      "t_ms": 833.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": [
+        {
+          "source": "probe",
+          "ref": "bug-3 telemetry",
+          "t_ms": 500.0
+        }
+      ]
+    },
+    {
+      "frame_index": 26,
+      "t_ms": 866.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": [
+        {
+          "source": "probe",
+          "ref": "bug-3 telemetry",
+          "t_ms": 500.0
+        }
+      ]
+    },
+    {
+      "frame_index": 27,
+      "t_ms": 900.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": [
+        {
+          "source": "probe",
+          "ref": "bug-3 telemetry",
+          "t_ms": 500.0
+        }
+      ]
+    },
+    {
+      "frame_index": 28,
+      "t_ms": 933.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": [
+        {
+          "source": "probe",
+          "ref": "bug-3 telemetry",
+          "t_ms": 500.0
+        }
+      ]
+    },
+    {
+      "frame_index": 29,
+      "t_ms": 966.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 30,
+      "t_ms": 1000.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 31,
+      "t_ms": 1033.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 32,
+      "t_ms": 1066.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 33,
+      "t_ms": 1100.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 34,
+      "t_ms": 1133.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 35,
+      "t_ms": 1166.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 36,
+      "t_ms": 1200.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 37,
+      "t_ms": 1233.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 38,
+      "t_ms": 1266.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 39,
+      "t_ms": 1300.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 40,
+      "t_ms": 1333.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 41,
+      "t_ms": 1366.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 42,
+      "t_ms": 1400.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 43,
+      "t_ms": 1433.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 44,
+      "t_ms": 1466.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 45,
+      "t_ms": 1500.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 46,
+      "t_ms": 1533.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 47,
+      "t_ms": 1566.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 48,
+      "t_ms": 1600.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 49,
+      "t_ms": 1633.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 50,
+      "t_ms": 1666.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 51,
+      "t_ms": 1700.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 52,
+      "t_ms": 1733.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 53,
+      "t_ms": 1766.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 54,
+      "t_ms": 1800.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 55,
+      "t_ms": 1833.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 56,
+      "t_ms": 1866.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 57,
+      "t_ms": 1900.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 58,
+      "t_ms": 1933.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 59,
+      "t_ms": 1966.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 60,
+      "t_ms": 2000.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 61,
+      "t_ms": 2033.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 62,
+      "t_ms": 2066.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 63,
+      "t_ms": 2100.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 64,
+      "t_ms": 2133.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 65,
+      "t_ms": 2166.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 66,
+      "t_ms": 2200.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 67,
+      "t_ms": 2233.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 68,
+      "t_ms": 2266.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 69,
+      "t_ms": 2300.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 70,
+      "t_ms": 2333.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 71,
+      "t_ms": 2366.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 72,
+      "t_ms": 2400.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 73,
+      "t_ms": 2433.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 74,
+      "t_ms": 2466.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 75,
+      "t_ms": 2500.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 76,
+      "t_ms": 2533.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 77,
+      "t_ms": 2566.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 78,
+      "t_ms": 2600.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 79,
+      "t_ms": 2633.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 80,
+      "t_ms": 2666.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 81,
+      "t_ms": 2700.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 82,
+      "t_ms": 2733.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 83,
+      "t_ms": 2766.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 84,
+      "t_ms": 2800.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 85,
+      "t_ms": 2833.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 86,
+      "t_ms": 2866.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 87,
+      "t_ms": 2900.0,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 88,
+      "t_ms": 2933.3,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    },
+    {
+      "frame_index": 89,
+      "t_ms": 2966.7,
+      "svg_paths": [],
+      "probe_events": [],
+      "har_entries": [],
+      "evidence": []
+    }
+  ]
+}

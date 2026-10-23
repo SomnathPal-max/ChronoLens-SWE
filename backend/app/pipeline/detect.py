@@ -314,7 +314,11 @@ def detect_clipping(
             right = bx + bw
             bottom = by + bh
 
-            # Checks if element is clipped by viewport edge
+            # Skip elements that are completely offscreen
+            if right <= 0 or bx >= viewport_width or bottom <= 0 or by >= viewport_height:
+                continue
+
+            # Checks if visible element is clipped by viewport edge
             is_clipped = (
                 bx <= edge_margin_px
                 or by <= edge_margin_px

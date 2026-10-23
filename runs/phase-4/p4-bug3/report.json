@@ -1,0 +1,95 @@
+{
+  "run_id": "p4-bug3",
+  "timestamp": "2026-10-23T07:26:27.628927+00:00",
+  "target_app": "demo-app",
+  "bug_number": 3,
+  "status": "FAILED",
+  "stability_score": "0/5 (0%)",
+  "original_signature": [
+    [
+      "clipping",
+      "action button"
+    ]
+  ],
+  "root_cause": {
+    "hypothesis": "Add Card button has fixed width of 120px with white-space: nowrap causing clipping",
+    "files": [
+      {
+        "path": "demo-app/src/components/Column.tsx",
+        "lines": "all",
+        "why": "root cause"
+      }
+    ],
+    "evidence": [
+      {
+        "source": "probe",
+        "ref": "bug-3 telemetry",
+        "t_ms": 500.0
+      }
+    ],
+    "falsifiable_check": "Apply patch for demo-app/src/components/Column.tsx",
+    "confidence": 0.96
+  },
+  "patch": {
+    "branch": "chronolens/fix-p4-bug3",
+    "rationale": "Removed fixed `120px` width constraint and `white-space: nowrap` on the Add Card button, allowing responsive sizing without text clipping at narrow viewports.",
+    "diff": "--- a/demo-app/src/components/Column.tsx\n+++ b/demo-app/src/components/Column.tsx\n@@ -66,5 +66,3 @@\n-  const addBtnStyle: React.CSSProperties = cfg.bug3\n-    ? { width: '120px', whiteSpace: 'nowrap', overflow: 'hidden' }\n-    : {};\n+  // Responsive button with flexible width and natural wrapping\n+  const addBtnStyle: React.CSSProperties = {};\n",
+    "tests_pass": true,
+    "lint_pass": true
+  },
+  "verification": {
+    "passed": false,
+    "runs": 5,
+    "passes": 0,
+    "median_shape_iou": 1.0,
+    "signature_absent_in_all": false,
+    "new_anomaly_types": [],
+    "run_details": [
+      {
+        "run_index": 1,
+        "passed": false,
+        "sig_reappeared": true,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 576
+      },
+      {
+        "run_index": 2,
+        "passed": false,
+        "sig_reappeared": true,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 570
+      },
+      {
+        "run_index": 3,
+        "passed": false,
+        "sig_reappeared": true,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 582
+      },
+      {
+        "run_index": 4,
+        "passed": false,
+        "sig_reappeared": true,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 570
+      },
+      {
+        "run_index": 5,
+        "passed": false,
+        "sig_reappeared": true,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 576
+      }
+    ]
+  }
+}

@@ -33,12 +33,14 @@ export const Modal: React.FC<ModalProps> = ({ card, onClose }) => {
   return (
     <div
       ref={overlayRef}
-      data-cl="modal"
       className="fixed inset-0 flex items-center justify-center bg-black/50 p-4"
       style={{ zIndex: 9999 }}
       onClick={handleOverlayClick}
     >
-      <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 relative">
+      <div
+        data-cl="modal"
+        className="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 relative"
+      >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors"

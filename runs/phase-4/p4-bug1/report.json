@@ -1,0 +1,95 @@
+{
+  "run_id": "p4-bug1",
+  "timestamp": "2026-10-23T07:27:16.617642+00:00",
+  "target_app": "demo-app",
+  "bug_number": 1,
+  "status": "PASSED",
+  "stability_score": "5/5 (100%)",
+  "original_signature": [
+    [
+      "teleport",
+      "kanban card"
+    ]
+  ],
+  "root_cause": {
+    "hypothesis": "Optimistic card move is overwritten by an asynchronous stale server response",
+    "files": [
+      {
+        "path": "demo-app/src/hooks/useCards.ts",
+        "lines": "all",
+        "why": "root cause"
+      }
+    ],
+    "evidence": [
+      {
+        "source": "probe",
+        "ref": "bug-1 telemetry",
+        "t_ms": 500.0
+      }
+    ],
+    "falsifiable_check": "Apply patch for demo-app/src/hooks/useCards.ts",
+    "confidence": 0.96
+  },
+  "patch": {
+    "branch": "chronolens/fix-p4-bug1",
+    "rationale": "Removed unversioned optimistic state overwrite; enforced monotonic request version counter (`moveVersionRef.current`) to drop delayed stale server responses.",
+    "diff": "--- a/demo-app/src/hooks/useCards.ts\n+++ b/demo-app/src/hooks/useCards.ts\n@@ -44,39 +44,21 @@\n-      if (cfg.bug1) {\n-        // BUG 1 path: NO request versioning \u2014 blindly accept server response\n-        try {\n-          const res = await fetch(`/api/cards/${cardId}/move`, {\n-            method: 'POST',\n-            headers: { 'Content-Type': 'application/json' },\n-            body: JSON.stringify({ column: targetColumn }),\n-          });\n-          if (!res.ok) throw new Error(`HTTP ${res.status}`);\n-          const data: CardData[] = await res.json();\n-          // Blindly overwrite state with server response (which is STALE)\n-          setCards(data);\n-        } catch (err) {\n-          setError((err as Error).message);\n-          // Revert on error\n-          fetchCards();\n-        }\n-      } else {\n-        // Healthy path: use version counter to ignore stale responses\n-        const version = ++moveVersionRef.current;\n-        try {\n-          const res = await fetch(`/api/cards/${cardId}/move`, {\n-            method: 'POST',\n-            headers: { 'Content-Type': 'application/json' },\n-            body: JSON.stringify({ column: targetColumn }),\n-          });\n-          if (!res.ok) throw new Error(`HTTP ${res.status}`);\n-          const data: CardData[] = await res.json();\n-          // Only apply if this is still the latest request\n-          if (moveVersionRef.current === version) {\n-            setCards(data);\n-          }\n-        } catch (err) {\n-          if (moveVersionRef.current === version) {\n-            setError((err as Error).message);\n-            fetchCards();\n-          }\n-        }\n-      }\n+      // Use monotonic version counter to ignore stale responses\n+      const version = ++moveVersionRef.current;\n+      try {\n+        const res = await fetch(`/api/cards/${cardId}/move`, {\n+          method: 'POST',\n+          headers: { 'Content-Type': 'application/json' },\n+          body: JSON.stringify({ column: targetColumn }),\n+        });\n+        if (!res.ok) throw new Error(`HTTP ${res.status}`);\n+        const data: CardData[] = await res.json();\n+        // Drop stale responses if a newer move occurred\n+        if (moveVersionRef.current === version) {\n+          setCards(\n+            data.map((c) => (c.id === cardId ? { ...c, column: targetColumn } : c))\n+          );\n+        }\n+      } catch (err) {\n+        if (moveVersionRef.current === version) {\n+          setError((err as Error).message);\n+          fetchCards();\n+        }\n+      }\n",
+    "tests_pass": true,
+    "lint_pass": true
+  },
+  "verification": {
+    "passed": true,
+    "runs": 5,
+    "passes": 5,
+    "median_shape_iou": 1.0,
+    "signature_absent_in_all": true,
+    "new_anomaly_types": [],
+    "run_details": [
+      {
+        "run_index": 1,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 6
+      },
+      {
+        "run_index": 2,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 6
+      },
+      {
+        "run_index": 3,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 6
+      },
+      {
+        "run_index": 4,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 6
+      },
+      {
+        "run_index": 5,
+        "passed": true,
+        "sig_reappeared": false,
+        "new_anomaly_types": [],
+        "median_shape_iou": 1.0,
+        "functional_pass": true,
+        "anomalies_count": 6
+      }
+    ]
+  }
+}
