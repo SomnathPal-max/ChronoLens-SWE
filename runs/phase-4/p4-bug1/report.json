@@ -1,6 +1,6 @@
 {
   "run_id": "p4-bug1",
-  "timestamp": "2026-10-23T09:20:02.874285+00:00",
+  "timestamp": "2026-10-23T20:50:31.967055+00:00",
   "target_app": "demo-app",
   "bug_number": 1,
   "status": "PASSED",
