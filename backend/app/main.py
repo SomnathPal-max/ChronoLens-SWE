@@ -10,6 +10,7 @@ Routes:
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
 import uuid
 from datetime import datetime
@@ -18,6 +19,7 @@ from typing import Any
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from starlette.responses import StreamingResponse
 
 logger = logging.getLogger(__name__)
@@ -36,6 +38,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Static file serving for runs and web frontend
+_repo_root = Path(__file__).resolve().parents[2]
+_runs_dir = _repo_root / "runs"
+if _runs_dir.exists():
+    app.mount("/runs", StaticFiles(directory=str(_runs_dir)), name="runs")
+
+_web_dist = _repo_root / "web" / "dist"
+if _web_dist.exists():
+    app.mount("/app", StaticFiles(directory=str(_web_dist), html=True), name="web_app")
+
 
 # ---------------------------------------------------------------------------
 # In-memory run storage (will be replaced with a database in production)
@@ -58,6 +71,69 @@ async def health() -> dict[str, str]:
         Status and version information.
     """
     return {"status": "ok", "version": "0.1.0"}
+
+
+@app.get("/api/presets")
+async def get_presets() -> list[dict[str, Any]]:
+    """Return available verified presets from Phase 4."""
+    presets: list[dict[str, Any]] = []
+    p4_dir = _repo_root / "runs" / "phase-4"
+    if p4_dir.exists():
+        for bug_dir in sorted(p4_dir.iterdir()):
+            report_file = bug_dir / "report.json"
+            if report_file.exists():
+                try:
+                    data = json.loads(report_file.read_text(encoding="utf-8"))
+                    presets.append(
+                        {
+                            "run_id": data.get("run_id", bug_dir.name),
+                            "bug_number": data.get("bug_number"),
+                            "status": data.get("status"),
+                            "stability_score": data.get("stability_score"),
+                        }
+                    )
+                except Exception:
+                    pass
+    return presets
+
+
+@app.get("/api/runs/{run_id}/session")
+async def get_run_session(run_id: str) -> dict[str, Any]:
+    """Get the scrubber session JSON for a given run."""
+    candidate_paths = [
+        _repo_root / "runs" / "phase-4" / run_id / "scrubber_session.json",
+        _repo_root / "runs" / run_id / "scrubber_session.json",
+    ]
+    for path in candidate_paths:
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+    raise HTTPException(status_code=404, detail=f"Scrubber session for {run_id} not found")
+
+
+@app.get("/api/runs/{run_id}/report")
+async def get_run_report(run_id: str) -> dict[str, Any]:
+    """Get the report JSON for a given run."""
+    candidate_paths = [
+        _repo_root / "runs" / "phase-4" / run_id / "report.json",
+        _repo_root / "runs" / run_id / "report.json",
+    ]
+    for path in candidate_paths:
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+    raise HTTPException(status_code=404, detail=f"Report for {run_id} not found")
+
+
+@app.get("/api/runs/{run_id}/pr")
+async def get_run_pr(run_id: str) -> dict[str, str]:
+    """Get the pull request markdown for a given run."""
+    candidate_paths = [
+        _repo_root / "runs" / "phase-4" / run_id / "pull_request.md",
+        _repo_root / "runs" / run_id / "pull_request.md",
+    ]
+    for path in candidate_paths:
+        if path.exists():
+            return {"markdown": path.read_text(encoding="utf-8")}
+    raise HTTPException(status_code=404, detail=f"PR for {run_id} not found")
 
 
 @app.post("/runs", status_code=201)

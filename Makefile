@@ -1,4 +1,4 @@
-.PHONY: install dev lint test record serve-demo serve-backend
+.PHONY: install dev lint test record serve-demo serve-backend serve-web build-web
 
 # ── Setup ──────────────────────────────────────────────────────────
 
@@ -28,6 +28,12 @@ serve-demo:
 
 serve-backend:
 	cd backend && uvicorn app.main:app --reload --port 8000
+
+serve-web:
+	cd web && npm run dev
+
+build-web:
+	cd web && npm run build
 
 # ── Recording ──────────────────────────────────────────────────────
 # Usage: make record BUG=1

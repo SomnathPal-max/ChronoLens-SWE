@@ -1,6 +1,6 @@
 {
   "run_id": "p4-bug2",
-  "timestamp": "2026-10-23T07:25:50.966918+00:00",
+  "timestamp": "2026-10-23T08:57:48.138642+00:00",
   "target_app": "demo-app",
   "bug_number": 2,
   "status": "PASSED",
@@ -52,7 +52,7 @@
         "new_anomaly_types": [],
         "median_shape_iou": 1.0,
         "functional_pass": true,
-        "anomalies_count": 746
+        "anomalies_count": 702
       },
       {
         "run_index": 2,
@@ -61,7 +61,7 @@
         "new_anomaly_types": [],
         "median_shape_iou": 1.0,
         "functional_pass": true,
-        "anomalies_count": 746
+        "anomalies_count": 690
       },
       {
         "run_index": 3,
@@ -70,7 +70,7 @@
         "new_anomaly_types": [],
         "median_shape_iou": 1.0,
         "functional_pass": true,
-        "anomalies_count": 760
+        "anomalies_count": 684
       },
       {
         "run_index": 4,
@@ -79,7 +79,7 @@
         "new_anomaly_types": [],
         "median_shape_iou": 1.0,
         "functional_pass": true,
-        "anomalies_count": 778
+        "anomalies_count": 690
       },
       {
         "run_index": 5,
@@ -88,7 +88,7 @@
         "new_anomaly_types": [],
         "median_shape_iou": 1.0,
         "functional_pass": true,
-        "anomalies_count": 753
+        "anomalies_count": 690
       }
     ]
   }
