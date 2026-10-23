@@ -19,6 +19,7 @@ from typing import Any
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import StreamingResponse
 
@@ -47,6 +48,9 @@ if _runs_dir.exists():
 
 _web_dist = _repo_root / "web" / "dist"
 if _web_dist.exists():
+    _assets_dir = _web_dist / "assets"
+    if _assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=str(_assets_dir)), name="web_assets")
     app.mount("/app", StaticFiles(directory=str(_web_dist), html=True), name="web_app")
 
 
@@ -61,6 +65,15 @@ _run_events: dict[str, list[dict[str, Any]]] = {}
 # ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
+
+
+@app.get("/")
+async def root() -> Any:
+    """Root route: serves the web scrubber UI or redirects to /docs."""
+    index_file = _web_dist / "index.html"
+    if index_file.exists():
+        return FileResponse(index_file)
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/health")

@@ -18,6 +18,13 @@ def test_health_check(client: TestClient) -> None:
     assert res.json() == {"status": "ok", "version": "0.1.0"}
 
 
+def test_root_route_serves_app_or_redirects(client: TestClient) -> None:
+    res = client.get("/")
+    assert res.status_code in (200, 307)
+    if res.status_code == 200:
+        assert "html" in res.headers.get("content-type", "").lower()
+
+
 def test_api_presets(client: TestClient) -> None:
     res = client.get("/api/presets")
     assert res.status_code == 200
