@@ -17,6 +17,9 @@ venv/
 node_modules/
 .next/
 
+# Worktrees
+.worktrees/
+
 # Binaries (FFmpeg local download)
 bin/
 *.exe

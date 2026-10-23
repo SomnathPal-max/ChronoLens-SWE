@@ -330,7 +330,7 @@ async def perceive(
 
 
 def generate_tracks_from_probe_log(
-    probe_log_path: Path | str,
+    probe_log_path: Path | str | list | dict,
     fps: float = 30.0,
 ) -> PerceiveResult:
     """Generate PerceiveResult directly from a recorded chronolens probe log.
@@ -340,20 +340,27 @@ def generate_tracks_from_probe_log(
     produce exact reference tracks for deterministic validation and offline testing.
 
     Args:
-        probe_log_path: Path to the JSON probe log produced by ingest.
+        probe_log_path: Path to the JSON probe log produced by ingest, or in-memory list/dict.
         fps: Video frames per second.
 
     Returns:
         A ``PerceiveResult`` with tracks for all tracked UI elements.
     """
-    path = Path(probe_log_path)
-    if not path.exists():
-        raise FileNotFoundError(f"Probe log file not found: {path}")
+    if isinstance(probe_log_path, (list, dict)):
+        data = probe_log_path
+    else:
+        path = Path(probe_log_path)
+        if not path.exists():
+            raise FileNotFoundError(f"Probe log file not found: {path}")
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
 
-    with open(path, encoding="utf-8") as f:
-        data = json.load(f)
-
-    probe_entries = data.get("probe_log", [])
+    if isinstance(data, list):
+        probe_entries = data
+    elif isinstance(data, dict):
+        probe_entries = data.get("probe_log") or data.get("events") or []
+    else:
+        probe_entries = []
 
     def _map_concept(data_cl: str | None, tag: str) -> str:
         if not data_cl:

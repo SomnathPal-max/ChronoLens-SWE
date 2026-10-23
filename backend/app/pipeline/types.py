@@ -171,3 +171,29 @@ class ReportResult:
     before_after_card_path: Path | None = None
     pr_markdown: str = ""
     scrubber_session_path: Path | None = None
+
+
+@dataclass
+class ResponsiveViewport:
+    """A target screen viewport definition."""
+
+    name: str  # e.g. "desktop", "tablet", "mobile"
+    width: int
+    height: int
+    device_scale_factor: float = 1.0
+    is_mobile: bool = False
+
+
+@dataclass
+class ResponsiveAuditResult:
+    """Result of multi-viewport responsive layout audit."""
+
+    viewports: list[ResponsiveViewport]
+    anomalies_by_viewport: dict[str, list[Anomaly]]
+    has_clipping: bool
+    has_overlap: bool
+    healthy_viewports: list[str]
+    failing_viewports: list[str]
+    summary: str
+    patch_result: PatchResult | None = None
+    multi_viewport_verify: dict[str, bool] = field(default_factory=dict)

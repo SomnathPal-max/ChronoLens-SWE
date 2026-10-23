@@ -2,17 +2,12 @@
   "probe_log": [
     {
       "type": "raf",
-      "timestamp": 61.200000047683716,
+      "timestamp": 69.30000007152557,
       "elements": []
     },
     {
       "type": "raf",
-      "timestamp": 73.5,
-      "elements": []
-    },
-    {
-      "type": "raf",
-      "timestamp": 94,
+      "timestamp": 86.5,
       "elements": [
         {
           "id": null,
@@ -33,7 +28,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 123.80000007152557,
+      "timestamp": 118.70000004768372,
       "elements": [
         {
           "id": null,
@@ -54,7 +49,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 138,
+      "timestamp": 128.39999997615814,
       "elements": [
         {
           "id": null,
@@ -75,7 +70,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 154.10000002384186,
+      "timestamp": 145.30000007152557,
       "elements": [
         {
           "id": null,
@@ -96,7 +91,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 170.70000004768372,
+      "timestamp": 162.39999997615814,
       "elements": [
         {
           "id": null,
@@ -117,7 +112,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 189.20000004768372,
+      "timestamp": 178.5,
       "elements": [
         {
           "id": null,
@@ -133,183 +128,24 @@
           "opacity": "1",
           "visibility": "visible",
           "display": "block"
-        },
+        }
+      ]
+    },
+    {
+      "type": "raf",
+      "timestamp": 195.60000002384186,
+      "elements": [
         {
           "id": null,
-          "dataCl": "kanban-board",
-          "tagName": "div",
+          "dataCl": "navbar",
+          "tagName": "nav",
           "rect": {
             "x": 0,
-            "y": 92,
+            "y": 0,
             "width": 800,
-            "height": 628
+            "height": 64
           },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "block"
-        },
-        {
-          "id": null,
-          "dataCl": "column-todo",
-          "tagName": "div",
-          "rect": {
-            "x": -44,
-            "y": 116,
-            "width": 280,
-            "height": 487.75
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "flex"
-        },
-        {
-          "id": null,
-          "dataCl": "card-1",
-          "tagName": "div",
-          "rect": {
-            "x": -32,
-            "y": 160,
-            "width": 256,
-            "height": 125.25
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "block"
-        },
-        {
-          "id": null,
-          "dataCl": "card-2",
-          "tagName": "div",
-          "rect": {
-            "x": -32,
-            "y": 297.25,
-            "width": 256,
-            "height": 125.25
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "block"
-        },
-        {
-          "id": null,
-          "dataCl": "card-3",
-          "tagName": "div",
-          "rect": {
-            "x": -32,
-            "y": 434.5,
-            "width": 256,
-            "height": 109.25
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "block"
-        },
-        {
-          "id": null,
-          "dataCl": "add-card-btn",
-          "tagName": "button",
-          "rect": {
-            "x": -32,
-            "y": 555.75,
-            "width": 256,
-            "height": 36
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "flex"
-        },
-        {
-          "id": null,
-          "dataCl": "column-inprogress",
-          "tagName": "div",
-          "rect": {
-            "x": 260,
-            "y": 116,
-            "width": 280,
-            "height": 487.75
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "flex"
-        },
-        {
-          "id": null,
-          "dataCl": "card-4",
-          "tagName": "div",
-          "rect": {
-            "x": 272,
-            "y": 160,
-            "width": 256,
-            "height": 109.25
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "block"
-        },
-        {
-          "id": null,
-          "dataCl": "card-5",
-          "tagName": "div",
-          "rect": {
-            "x": 272,
-            "y": 281.25,
-            "width": 256,
-            "height": 109.25
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "block"
-        },
-        {
-          "id": null,
-          "dataCl": "column-done",
-          "tagName": "div",
-          "rect": {
-            "x": 564,
-            "y": 116,
-            "width": 280,
-            "height": 487.75
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "flex"
-        },
-        {
-          "id": null,
-          "dataCl": "card-6",
-          "tagName": "div",
-          "rect": {
-            "x": 576,
-            "y": 160,
-            "width": 256,
-            "height": 109.25
-          },
-          "zIndex": "auto",
-          "opacity": "1",
-          "visibility": "visible",
-          "display": "block"
-        },
-        {
-          "id": null,
-          "dataCl": "card-7",
-          "tagName": "div",
-          "rect": {
-            "x": 576,
-            "y": 281.25,
-            "width": 256,
-            "height": 109.25
-          },
-          "zIndex": "auto",
+          "zIndex": "1000",
           "opacity": "1",
           "visibility": "visible",
           "display": "block"
@@ -318,7 +154,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 211,
+      "timestamp": 214.89999997615814,
       "elements": [
         {
           "id": null,
@@ -519,7 +355,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 224.89999997615814,
+      "timestamp": 235.30000007152557,
       "elements": [
         {
           "id": null,
@@ -720,7 +556,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 237.60000002384186,
+      "timestamp": 245.70000004768372,
       "elements": [
         {
           "id": null,
@@ -921,7 +757,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 254.60000002384186,
+      "timestamp": 262.10000002384186,
       "elements": [
         {
           "id": null,
@@ -1122,7 +958,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 270.60000002384186,
+      "timestamp": 278.7000000476837,
       "elements": [
         {
           "id": null,
@@ -1323,7 +1159,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 286.5,
+      "timestamp": 296.89999997615814,
       "elements": [
         {
           "id": null,
@@ -1524,7 +1360,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 304.39999997615814,
+      "timestamp": 311.89999997615814,
       "elements": [
         {
           "id": null,
@@ -1725,7 +1561,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 320.60000002384186,
+      "timestamp": 328.3000000715256,
       "elements": [
         {
           "id": null,
@@ -1926,7 +1762,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 336.60000002384186,
+      "timestamp": 345,
       "elements": [
         {
           "id": null,
@@ -2127,7 +1963,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 354.3000000715256,
+      "timestamp": 363.2000000476837,
       "elements": [
         {
           "id": null,
@@ -2328,7 +2164,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 370.10000002384186,
+      "timestamp": 378.89999997615814,
       "elements": [
         {
           "id": null,
@@ -2529,7 +2365,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 386.7000000476837,
+      "timestamp": 395,
       "elements": [
         {
           "id": null,
@@ -2730,7 +2566,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 404,
+      "timestamp": 413.8000000715256,
       "elements": [
         {
           "id": null,
@@ -2931,7 +2767,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 420.2000000476837,
+      "timestamp": 428.39999997615814,
       "elements": [
         {
           "id": null,
@@ -3132,7 +2968,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 436.60000002384186,
+      "timestamp": 445.10000002384186,
       "elements": [
         {
           "id": null,
@@ -3333,7 +3169,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 454.3000000715256,
+      "timestamp": 462.2000000476837,
       "elements": [
         {
           "id": null,
@@ -3534,7 +3370,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 471.3000000715256,
+      "timestamp": 479.10000002384186,
       "elements": [
         {
           "id": null,
@@ -3735,7 +3571,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 488.3000000715256,
+      "timestamp": 495.5,
       "elements": [
         {
           "id": null,
@@ -3936,7 +3772,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 504,
+      "timestamp": 512.3999999761581,
       "elements": [
         {
           "id": null,
@@ -4137,7 +3973,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 521.1000000238419,
+      "timestamp": 529.3000000715256,
       "elements": [
         {
           "id": null,
@@ -4338,7 +4174,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 537.2000000476837,
+      "timestamp": 546.6000000238419,
       "elements": [
         {
           "id": null,
@@ -4539,7 +4375,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 553.8000000715256,
+      "timestamp": 562.6000000238419,
       "elements": [
         {
           "id": null,
@@ -4740,7 +4576,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 571,
+      "timestamp": 579,
       "elements": [
         {
           "id": null,
@@ -4941,7 +4777,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 587.3999999761581,
+      "timestamp": 595.1000000238419,
       "elements": [
         {
           "id": null,
@@ -5142,7 +4978,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 604,
+      "timestamp": 612.6000000238419,
       "elements": [
         {
           "id": null,
@@ -5343,7 +5179,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 621.1000000238419,
+      "timestamp": 628.8000000715256,
       "elements": [
         {
           "id": null,
@@ -5544,7 +5380,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 637.3000000715256,
+      "timestamp": 645.3999999761581,
       "elements": [
         {
           "id": null,
@@ -5745,7 +5581,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 653.8000000715256,
+      "timestamp": 661.6000000238419,
       "elements": [
         {
           "id": null,
@@ -5946,7 +5782,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 669.8999999761581,
+      "timestamp": 678.3999999761581,
       "elements": [
         {
           "id": null,
@@ -6147,7 +5983,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 688,
+      "timestamp": 695.2000000476837,
       "elements": [
         {
           "id": null,
@@ -6348,7 +6184,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 703.6000000238419,
+      "timestamp": 713.7000000476837,
       "elements": [
         {
           "id": null,
@@ -6549,7 +6385,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 720.3999999761581,
+      "timestamp": 729,
       "elements": [
         {
           "id": null,
@@ -6750,7 +6586,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 737.5,
+      "timestamp": 745.3000000715256,
       "elements": [
         {
           "id": null,
@@ -6951,7 +6787,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 754.1000000238419,
+      "timestamp": 762.5,
       "elements": [
         {
           "id": null,
@@ -7152,7 +6988,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 771.2000000476837,
+      "timestamp": 778.7000000476837,
       "elements": [
         {
           "id": null,
@@ -7353,7 +7189,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 786.6000000238419,
+      "timestamp": 795.5,
       "elements": [
         {
           "id": null,
@@ -7554,7 +7390,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 804,
+      "timestamp": 811.6000000238419,
       "elements": [
         {
           "id": null,
@@ -7755,7 +7591,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 820.7000000476837,
+      "timestamp": 829,
       "elements": [
         {
           "id": null,
@@ -7956,7 +7792,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 836.8000000715256,
+      "timestamp": 845.3999999761581,
       "elements": [
         {
           "id": null,
@@ -8157,7 +7993,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 853.8999999761581,
+      "timestamp": 862.2000000476837,
       "elements": [
         {
           "id": null,
@@ -8358,7 +8194,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 870.5,
+      "timestamp": 878.8999999761581,
       "elements": [
         {
           "id": null,
@@ -8559,7 +8395,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 888.8000000715256,
+      "timestamp": 895.2000000476837,
       "elements": [
         {
           "id": null,
@@ -8760,7 +8596,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 903.2000000476837,
+      "timestamp": 911.8000000715256,
       "elements": [
         {
           "id": null,
@@ -8961,7 +8797,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 921.6000000238419,
+      "timestamp": 930,
       "elements": [
         {
           "id": null,
@@ -9162,7 +8998,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 937.3000000715256,
+      "timestamp": 945,
       "elements": [
         {
           "id": null,
@@ -9363,7 +9199,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 954.1000000238419,
+      "timestamp": 961.8999999761581,
       "elements": [
         {
           "id": null,
@@ -9564,7 +9400,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 971.1000000238419,
+      "timestamp": 978.6000000238419,
       "elements": [
         {
           "id": null,
@@ -9765,7 +9601,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 986.7000000476837,
+      "timestamp": 995.6000000238419,
       "elements": [
         {
           "id": null,
@@ -9966,7 +9802,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1008.2000000476837,
+      "timestamp": 1017.3000000715256,
       "elements": [
         {
           "id": null,
@@ -10167,7 +10003,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1021.2000000476837,
+      "timestamp": 1029.1000000238419,
       "elements": [
         {
           "id": null,
@@ -10368,7 +10204,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1038.3000000715256,
+      "timestamp": 1045.6000000238419,
       "elements": [
         {
           "id": null,
@@ -10569,7 +10405,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1054.2000000476837,
+      "timestamp": 1062.6000000238419,
       "elements": [
         {
           "id": null,
@@ -10770,7 +10606,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1079.3999999761581,
+      "timestamp": 1084.3000000715256,
       "elements": [
         {
           "id": null,
@@ -10986,7 +10822,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1091.2000000476837,
+      "timestamp": 1096.1000000238419,
       "elements": [
         {
           "id": null,
@@ -11202,7 +11038,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1105.2000000476837,
+      "timestamp": 1112.1000000238419,
       "elements": [
         {
           "id": null,
@@ -11418,7 +11254,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1120.3000000715256,
+      "timestamp": 1128.3999999761581,
       "elements": [
         {
           "id": null,
@@ -11634,7 +11470,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1137.6000000238419,
+      "timestamp": 1145.8000000715256,
       "elements": [
         {
           "id": null,
@@ -11850,7 +11686,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1153.5,
+      "timestamp": 1162.1000000238419,
       "elements": [
         {
           "id": null,
@@ -12066,7 +11902,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1171.2000000476837,
+      "timestamp": 1178.5,
       "elements": [
         {
           "id": null,
@@ -12282,7 +12118,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1188.5,
+      "timestamp": 1196,
       "elements": [
         {
           "id": null,
@@ -12498,7 +12334,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1203.3999999761581,
+      "timestamp": 1211.8000000715256,
       "elements": [
         {
           "id": null,
@@ -12714,7 +12550,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1220.6000000238419,
+      "timestamp": 1228.6000000238419,
       "elements": [
         {
           "id": null,
@@ -12930,7 +12766,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1237,
+      "timestamp": 1245.6000000238419,
       "elements": [
         {
           "id": null,
@@ -13146,7 +12982,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1255.1000000238419,
+      "timestamp": 1262.3000000715256,
       "elements": [
         {
           "id": null,
@@ -13362,7 +13198,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1270.1000000238419,
+      "timestamp": 1278.6000000238419,
       "elements": [
         {
           "id": null,
@@ -13578,7 +13414,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1287.1000000238419,
+      "timestamp": 1295.2000000476837,
       "elements": [
         {
           "id": null,
@@ -13794,7 +13630,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1304.1000000238419,
+      "timestamp": 1312.1000000238419,
       "elements": [
         {
           "id": null,
@@ -14010,7 +13846,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1320.3999999761581,
+      "timestamp": 1328.7000000476837,
       "elements": [
         {
           "id": null,
@@ -14226,7 +14062,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1337.3000000715256,
+      "timestamp": 1345.5,
       "elements": [
         {
           "id": null,
@@ -14442,7 +14278,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1354.3999999761581,
+      "timestamp": 1361.8999999761581,
       "elements": [
         {
           "id": null,
@@ -14658,7 +14494,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1370.3000000715256,
+      "timestamp": 1378.8999999761581,
       "elements": [
         {
           "id": null,
@@ -14874,7 +14710,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1387.3000000715256,
+      "timestamp": 1395.8000000715256,
       "elements": [
         {
           "id": null,
@@ -15090,7 +14926,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1403.3999999761581,
+      "timestamp": 1412.1000000238419,
       "elements": [
         {
           "id": null,
@@ -15306,7 +15142,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1422.1000000238419,
+      "timestamp": 1428.8000000715256,
       "elements": [
         {
           "id": null,
@@ -15522,7 +15358,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1437.2000000476837,
+      "timestamp": 1446,
       "elements": [
         {
           "id": null,
@@ -15738,7 +15574,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1453.2000000476837,
+      "timestamp": 1462.7000000476837,
       "elements": [
         {
           "id": null,
@@ -15954,7 +15790,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1471.5,
+      "timestamp": 1479,
       "elements": [
         {
           "id": null,
@@ -16170,7 +16006,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1487.1000000238419,
+      "timestamp": 1495.3999999761581,
       "elements": [
         {
           "id": null,
@@ -16386,7 +16222,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1505,
+      "timestamp": 1513.2000000476837,
       "elements": [
         {
           "id": null,
@@ -16602,7 +16438,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1520.6000000238419,
+      "timestamp": 1529.1000000238419,
       "elements": [
         {
           "id": null,
@@ -16818,7 +16654,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1537,
+      "timestamp": 1545.2000000476837,
       "elements": [
         {
           "id": null,
@@ -17034,7 +16870,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1553.6000000238419,
+      "timestamp": 1562.7000000476837,
       "elements": [
         {
           "id": null,
@@ -17250,7 +17086,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1570.3000000715256,
+      "timestamp": 1579.3999999761581,
       "elements": [
         {
           "id": null,
@@ -17466,7 +17302,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1587,
+      "timestamp": 1595,
       "elements": [
         {
           "id": null,
@@ -17682,7 +17518,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1603.7000000476837,
+      "timestamp": 1611.8999999761581,
       "elements": [
         {
           "id": null,
@@ -17898,7 +17734,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1620.6000000238419,
+      "timestamp": 1629.3999999761581,
       "elements": [
         {
           "id": null,
@@ -18114,7 +17950,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1636.8000000715256,
+      "timestamp": 1645.7000000476837,
       "elements": [
         {
           "id": null,
@@ -18330,7 +18166,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1653.3999999761581,
+      "timestamp": 1661.8999999761581,
       "elements": [
         {
           "id": null,
@@ -18546,7 +18382,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1670,
+      "timestamp": 1679.2000000476837,
       "elements": [
         {
           "id": null,
@@ -18762,7 +18598,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1686.5,
+      "timestamp": 1696.2000000476837,
       "elements": [
         {
           "id": null,
@@ -18978,7 +18814,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1703.3999999761581,
+      "timestamp": 1712,
       "elements": [
         {
           "id": null,
@@ -19194,7 +19030,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1720.2000000476837,
+      "timestamp": 1728.8999999761581,
       "elements": [
         {
           "id": null,
@@ -19410,7 +19246,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1737.1000000238419,
+      "timestamp": 1745.2000000476837,
       "elements": [
         {
           "id": null,
@@ -19626,7 +19462,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1753.8000000715256,
+      "timestamp": 1762.8000000715256,
       "elements": [
         {
           "id": null,
@@ -19842,7 +19678,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1771.1000000238419,
+      "timestamp": 1779.5,
       "elements": [
         {
           "id": null,
@@ -20058,7 +19894,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1786.7000000476837,
+      "timestamp": 1796.7000000476837,
       "elements": [
         {
           "id": null,
@@ -20274,7 +20110,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1803.7000000476837,
+      "timestamp": 1812,
       "elements": [
         {
           "id": null,
@@ -20490,7 +20326,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1820.1000000238419,
+      "timestamp": 1829.8000000715256,
       "elements": [
         {
           "id": null,
@@ -20706,7 +20542,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1836.8999999761581,
+      "timestamp": 1844.8999999761581,
       "elements": [
         {
           "id": null,
@@ -20922,7 +20758,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1853.5,
+      "timestamp": 1862.3999999761581,
       "elements": [
         {
           "id": null,
@@ -21138,7 +20974,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1871,
+      "timestamp": 1879.1000000238419,
       "elements": [
         {
           "id": null,
@@ -21354,7 +21190,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1888.1000000238419,
+      "timestamp": 1895.3000000715256,
       "elements": [
         {
           "id": null,
@@ -21570,7 +21406,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1904.6000000238419,
+      "timestamp": 1912,
       "elements": [
         {
           "id": null,
@@ -21786,7 +21622,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1919.8999999761581,
+      "timestamp": 1929.5,
       "elements": [
         {
           "id": null,
@@ -22002,7 +21838,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1937.5,
+      "timestamp": 1945.7000000476837,
       "elements": [
         {
           "id": null,
@@ -22218,7 +22054,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1954.2000000476837,
+      "timestamp": 1962.2000000476837,
       "elements": [
         {
           "id": null,
@@ -22434,7 +22270,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1970.5,
+      "timestamp": 1978.5,
       "elements": [
         {
           "id": null,
@@ -22650,7 +22486,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 1987.3999999761581,
+      "timestamp": 1995.8000000715256,
       "elements": [
         {
           "id": null,
@@ -22866,7 +22702,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 2004.2000000476837,
+      "timestamp": 2012.3999999761581,
       "elements": [
         {
           "id": null,
@@ -23082,7 +22918,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 2022.3999999761581,
+      "timestamp": 2029.3999999761581,
       "elements": [
         {
           "id": null,
@@ -23298,7 +23134,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 2037.2000000476837,
+      "timestamp": 2045,
       "elements": [
         {
           "id": null,
@@ -23514,7 +23350,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 2054,
+      "timestamp": 2062.399999976158,
       "elements": [
         {
           "id": null,
@@ -23730,7 +23566,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 2070.8000000715256,
+      "timestamp": 2079.7000000476837,
       "elements": [
         {
           "id": null,
@@ -23946,7 +23782,7 @@
     },
     {
       "type": "raf",
-      "timestamp": 2087.899999976158,
+      "timestamp": 2095.3000000715256,
       "elements": [
         {
           "id": null,
@@ -24167,7 +24003,7 @@
       "type": "z-index-trap",
       "element": "modal",
       "description": "Modal trapped under navbar due to stacking context from transform",
-      "timestamp": 1067.7000000476837
+      "timestamp": 1076.3999999761581
     }
   ]
 }

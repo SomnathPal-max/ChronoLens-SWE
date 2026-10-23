@@ -6,10 +6,13 @@ from backend.app.pipeline.patch import patch
 from backend.app.pipeline.perceive import perceive
 from backend.app.pipeline.report import report
 from backend.app.pipeline.reproduce import reproduce
+from backend.app.pipeline.responsive import audit_responsive, auto_patch_responsive
 from backend.app.pipeline.rootcause import root_cause
 from backend.app.pipeline.verify import verify
 
 __all__ = [
+    "audit_responsive",
+    "auto_patch_responsive",
     "convert_to_h264",
     "detect",
     "ingest",
