@@ -1,0 +1,249 @@
+"""ChronoLens-SWE API server.
+
+Routes:
+    POST /runs              — start a new pipeline run
+    GET  /runs/{id}         — get run status and results
+    GET  /runs/{id}/events  — SSE stream of live run events
+    GET  /health            — health check
+"""
+
+from __future__ import annotations
+
+import asyncio
+import logging
+import uuid
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.responses import StreamingResponse
+
+logger = logging.getLogger(__name__)
+
+app = FastAPI(
+    title="ChronoLens-SWE",
+    description="AI-powered visual regression debugger using Meta SAM 3.1",
+    version="0.1.0",
+)
+
+# CORS middleware for local development
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ---------------------------------------------------------------------------
+# In-memory run storage (will be replaced with a database in production)
+# ---------------------------------------------------------------------------
+
+_runs: dict[str, dict[str, Any]] = {}
+_run_events: dict[str, list[dict[str, Any]]] = {}
+
+
+# ---------------------------------------------------------------------------
+# Routes
+# ---------------------------------------------------------------------------
+
+
+@app.get("/health")
+async def health() -> dict[str, str]:
+    """Health check endpoint.
+
+    Returns:
+        Status and version information.
+    """
+    return {"status": "ok", "version": "0.1.0"}
+
+
+@app.post("/runs", status_code=201)
+async def create_run(
+    clip: UploadFile = File(...),
+    description: str = Form(""),
+    repo_path: str = Form(""),
+    app_start_command: str = Form(""),
+    base_url: str = Form("http://localhost:5173"),
+) -> dict[str, Any]:
+    """Start a new pipeline run.
+
+    Accepts a video clip (multipart upload), along with metadata
+    describing the bug and the target repository.
+
+    Args:
+        clip: Uploaded video clip file.
+        description: Human-readable description of the bug.
+        repo_path: Path to the repository under test.
+        app_start_command: Command to start the target application.
+        base_url: Base URL where the app will be available.
+
+    Returns:
+        Dictionary with the ``run_id`` and initial status.
+    """
+    run_id = str(uuid.uuid4())
+    run_dir = Path("runs") / run_id
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    # Save uploaded clip
+    clip_path = run_dir / (clip.filename or "clip.webm")
+    content = await clip.read()
+    clip_path.write_bytes(content)
+
+    run_data: dict[str, Any] = {
+        "run_id": run_id,
+        "status": "pending",
+        "created_at": datetime.now().isoformat(),
+        "description": description,
+        "repo_path": repo_path,
+        "app_start_command": app_start_command,
+        "base_url": base_url,
+        "clip_path": str(clip_path),
+        "result": None,
+        "error": None,
+    }
+
+    _runs[run_id] = run_data
+    _run_events[run_id] = []
+
+    # Start pipeline in background
+    asyncio.create_task(_run_pipeline(run_id))
+
+    logger.info("Created run %s for clip %s", run_id, clip.filename)
+
+    return {"run_id": run_id, "status": "pending"}
+
+
+@app.get("/runs/{run_id}")
+async def get_run(run_id: str) -> dict[str, Any]:
+    """Get run status and results.
+
+    Args:
+        run_id: The unique run identifier.
+
+    Returns:
+        Full run data including status, results, and errors.
+
+    Raises:
+        HTTPException: 404 if the run is not found.
+    """
+    if run_id not in _runs:
+        raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
+    return _runs[run_id]
+
+
+@app.get("/runs/{run_id}/events")
+async def get_run_events(run_id: str) -> StreamingResponse:
+    """SSE stream of live run events.
+
+    Yields Server-Sent Events (SSE) as the pipeline progresses
+    through its stages.
+
+    Args:
+        run_id: The unique run identifier.
+
+    Returns:
+        A streaming SSE response.
+
+    Raises:
+        HTTPException: 404 if the run is not found.
+    """
+    if run_id not in _runs:
+        raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
+
+    async def event_generator():
+        """Yield SSE events for the given run."""
+        import json
+
+        last_index = 0
+        while True:
+            events = _run_events.get(run_id, [])
+            for event in events[last_index:]:
+                yield f"data: {json.dumps(event)}\n\n"
+                last_index += 1
+
+            # Check if run is complete
+            run = _runs.get(run_id)
+            if run and run["status"] in ("completed", "failed"):
+                yield f"data: {json.dumps({'type': 'done', 'status': run['status']})}\n\n"
+                break
+
+            await asyncio.sleep(0.5)
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+        },
+    )
+
+
+# ---------------------------------------------------------------------------
+# Background pipeline execution
+# ---------------------------------------------------------------------------
+
+
+def _emit_event(run_id: str, event_type: str, data: dict[str, Any] | None = None) -> None:
+    """Emit a pipeline event for SSE streaming.
+
+    Args:
+        run_id: The run to emit the event for.
+        event_type: Type of event (e.g. ``"stage_start"``, ``"stage_complete"``).
+        data: Additional event data.
+    """
+    event: dict[str, Any] = {
+        "type": event_type,
+        "timestamp": datetime.now().isoformat(),
+        **(data or {}),
+    }
+    _run_events.setdefault(run_id, []).append(event)
+
+
+async def _run_pipeline(run_id: str) -> None:
+    """Execute the full pipeline for a run.
+
+    Runs each stage sequentially, updating status and emitting
+    events along the way.
+
+    Args:
+        run_id: The run to execute.
+    """
+    from backend.app.pipeline.config import PipelineConfig
+    from backend.app.pipeline.ingest import ingest
+
+    run = _runs[run_id]
+    run["status"] = "running"
+    _emit_event(run_id, "pipeline_start")
+
+    config = PipelineConfig(run_dir=str(Path("runs") / run_id))
+
+    try:
+        # Stage 1: Ingest
+        _emit_event(run_id, "stage_start", {"stage": "ingest"})
+        ingest_result = await ingest(run["clip_path"], config.run_dir)
+        _emit_event(run_id, "stage_complete", {"stage": "ingest"})
+
+        # Stage 2–8: stubs — will be wired in later phases
+        # Each stage would follow the same pattern:
+        #   _emit_event(run_id, "stage_start", {"stage": "<name>"})
+        #   result = await stage_func(...)
+        #   _emit_event(run_id, "stage_complete", {"stage": "<name>"})
+
+        run["status"] = "completed"
+        run["result"] = {
+            "ingest": {
+                "h264_path": ingest_result.h264_path,
+                "metadata": ingest_result.metadata,
+            },
+        }
+        _emit_event(run_id, "pipeline_complete")
+
+    except Exception as exc:
+        logger.exception("Pipeline failed for run %s", run_id)
+        run["status"] = "failed"
+        run["error"] = str(exc)
+        _emit_event(run_id, "pipeline_error", {"error": str(exc)})

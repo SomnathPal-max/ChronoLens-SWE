@@ -1,0 +1,11 @@
+--- a/demo-app/src/components/Board.tsx
++++ b/demo-app/src/components/Board.tsx
+@@ -43,7 +43,5 @@ export const Board: React.FC<BoardProps> = ({ getCardsByColumn, moveCard }) => {
+-  // Bug 2: the board container gets a transform that creates a new stacking context
+-  const boardContainerStyle: React.CSSProperties = cfg.bug2
+-    ? { transform: 'translateZ(0)' }
+-    : {};
++  // Modal is rendered in document root or without trapping stacking context
++  const boardContainerStyle: React.CSSProperties = {};
+ 
+   return (

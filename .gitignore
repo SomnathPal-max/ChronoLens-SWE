@@ -1,0 +1,47 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Node
+node_modules/
+.next/
+
+# Binaries (FFmpeg local download)
+bin/
+*.exe
+
+# Runs (per-run artifacts)
+runs/*
+!runs/.gitkeep
+!runs/phase-*/
+!runs/**/evidence.md
+!runs/**/evidence.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+htmlcov/
+.coverage
+.pytest_cache/
+
+# Playwright
+test-results/

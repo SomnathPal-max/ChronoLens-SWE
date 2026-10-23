@@ -1,0 +1,11 @@
+--- a/demo-app/src/components/Column.tsx
++++ b/demo-app/src/components/Column.tsx
+@@ -53,8 +53,4 @@ export const Column: React.FC<ColumnProps> = ({
+-  // Bug 3: fixed-width button with nowrap that clips text
+-  const addBtnStyle: React.CSSProperties = cfg.bug3
+-    ? { width: '120px', whiteSpace: 'nowrap', overflow: 'hidden' }
+-    : {};
++  // Responsive button with flexible width and natural wrapping
++  const addBtnStyle: React.CSSProperties = {};
+ 
+   const handleAddClick = () => {

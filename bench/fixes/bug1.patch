@@ -1,0 +1,36 @@
+--- a/demo-app/src/hooks/useCards.ts
++++ b/demo-app/src/hooks/useCards.ts
+@@ -43,21 +43,9 @@ export function useCards() {
+         prev.map((c) => (c.id === cardId ? { ...c, column: targetColumn } : c))
+       );
+ 
+-      if (cfg.bug1) {
+-        // BUG 1 path: NO request versioning — blindly accept server response
+-        try {
+-          const res = await fetch(`/api/cards/${cardId}/move`, {
+-            method: 'POST',
+-            headers: { 'Content-Type': 'application/json' },
+-            body: JSON.stringify({ column: targetColumn }),
+-          });
+-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+-          const data: CardData[] = await res.json();
+-          // Blindly overwrite state with server response (which is STALE)
+-          setCards(data);
+-        } catch (err) {
+-          setError((err as Error).message);
+-          // Revert on error
+-          fetchCards();
+-        }
+-      } else {
+-        // Healthy path: use version counter to ignore stale responses
++      // Use monotonic version counter to ignore stale responses
+         const version = ++moveVersionRef.current;
+         try {
+           const res = await fetch(`/api/cards/${cardId}/move`, {
+@@ -73,6 +61,5 @@ export function useCards() {
+           // Revert on error
+           fetchCards();
+         }
+-      }
+     },
+     [fetchCards]
