@@ -54,6 +54,7 @@ class DetectionConfig:
     cross_concept_overlap_iou: float = 0.05
     clipping_enabled: bool = True
     must_not_overlap_pairs: tuple[tuple[str, str], ...] = (("modal dialog", "navigation bar"),)
+    signature_window_ms: float = 300.0
 
     # Convenience aliases matching Section 7 spec terminology
     @property

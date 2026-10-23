@@ -4,9 +4,9 @@
 
 | Bug | Anomaly Detected | Frame Accuracy | Reproduced | Correct File | Patch 5/5 |
 |-----|-----------------|----------------|------------|--------------|-----------|
-| 1 Race | ✅ Yes (`teleport` / `dropout`) | ✅ Within ±3 frames | ⬜ | ⬜ | ⬜ |
-| 2 Z-index | ✅ Yes (`cross_concept_overlap`) | ✅ Within ±3 frames | ⬜ | ⬜ | ⬜ |
-| 3 Clipping | ✅ Yes (`clipping`) | ✅ Within ±3 frames | ⬜ | ⬜ | ⬜ |
+| 1 Race | ✅ Yes (`teleport` / `dropout`) | ✅ Within ±3 frames | ✅ Signature Match (attempt 1) | ✅ `demo-app/src/hooks/useCards.ts` | ⬜ |
+| 2 Z-index | ✅ Yes (`cross_concept_overlap`) | ✅ Within ±3 frames | ✅ Signature Match (attempt 1) | ✅ `demo-app/src/components/Board.tsx` | ⬜ |
+| 3 Clipping | ✅ Yes (`clipping`) | ✅ Within ±3 frames | ✅ Signature Match (attempt 1) | ✅ `demo-app/src/components/Column.tsx` | ⬜ |
 
 > Healthy baseline verification: 0 false positive anomalies detected on clean runs.
 
