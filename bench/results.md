@@ -4,9 +4,11 @@
 
 | Bug | Anomaly Detected | Frame Accuracy | Reproduced | Correct File | Patch 5/5 |
 |-----|-----------------|----------------|------------|--------------|-----------|
-| 1 Race | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 2 Z-index | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 3 Clipping | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 1 Race | ✅ Yes (`teleport` / `dropout`) | ✅ Within ±3 frames | ⬜ | ⬜ | ⬜ |
+| 2 Z-index | ✅ Yes (`cross_concept_overlap`) | ✅ Within ±3 frames | ⬜ | ⬜ | ⬜ |
+| 3 Clipping | ✅ Yes (`clipping`) | ✅ Within ±3 frames | ⬜ | ⬜ | ⬜ |
+
+> Healthy baseline verification: 0 false positive anomalies detected on clean runs.
 
 > Results will be filled in as phases are completed.
 
