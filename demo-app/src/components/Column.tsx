@@ -114,7 +114,7 @@ export const Column: React.FC<ColumnProps> = ({
             title="Add a new card to To Do"
           >
             <PlusIcon size={12} />
-            <span>+ Add New Card</span>
+            <span>Add New Card</span>
           </button>
         )}
       </div>
