@@ -66,7 +66,7 @@ const App: React.FC = () => {
   );
 
   return (
-    <div key={bugRefreshKey} className="min-h-screen flex bg-slate-950 text-slate-100 overflow-hidden font-sans">
+    <div key={bugRefreshKey} className="min-h-screen flex bg-midnight-950 text-vanilla-100 overflow-hidden font-sans">
       {/* Sleek Dark Left Sidebar */}
       <Sidebar activeBugCount={activeBugCount} onBugConfigChange={handleBugConfigChange} />
 
@@ -81,9 +81,9 @@ const App: React.FC = () => {
 
         {/* Loading / Error states */}
         {loading && (
-          <div className="flex-1 flex items-center justify-center bg-slate-950">
-            <div className="flex items-center gap-3 text-slate-400 text-sm">
-              <span className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+          <div className="flex-1 flex items-center justify-center bg-midnight-950">
+            <div className="flex items-center gap-3 text-vanilla-muted text-sm">
+              <span className="w-4 h-4 border-2 border-midnight-indigo border-t-transparent rounded-full animate-spin" />
               <span>Loading Linear board state…</span>
             </div>
           </div>

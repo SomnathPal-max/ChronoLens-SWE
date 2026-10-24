@@ -49,7 +49,7 @@ export const Board: React.FC<BoardProps> = ({ getCardsByColumn, moveCard, onAddC
   return (
     <div
       data-cl="kanban-board"
-      className="flex-1 p-6 overflow-x-auto bg-slate-950 min-h-[calc(100vh-3.5rem)]"
+      className="flex-1 p-6 overflow-x-auto bg-midnight-950 min-h-[calc(100vh-3.5rem)]"
       style={boardContainerStyle}
     >
       <div className="flex gap-6 max-w-7xl mx-auto justify-start lg:justify-center items-start">

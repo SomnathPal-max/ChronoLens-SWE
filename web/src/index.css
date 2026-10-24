@@ -4,23 +4,28 @@
 
 @layer base {
   body {
-    @apply bg-[#0a0d14] text-slate-100 antialiased;
+    @apply bg-[#0B0D1B] text-[#FDF8EC] antialiased;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
 
-  /* Custom dark scrollbars */
+  ::selection {
+    background-color: #5E6CE7;
+    color: #FFFDF8;
+  }
+
+  /* Custom Midnight Indigo scrollbars */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0f1422;
+    background: #0B0D1B;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e293b;
+    background: #252D5E;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: #5E6CE7;
   }
 }

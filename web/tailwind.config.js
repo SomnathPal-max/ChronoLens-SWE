@@ -5,11 +5,13 @@ export default {
     extend: {
       colors: {
         chrono: {
-          bg: '#0a0d14',
-          card: '#111622',
-          border: '#1f293d',
-          accent: '#6366f1',
-          muted: '#64748b',
+          bg: '#0B0D1B',
+          card: '#121634',
+          border: '#252D5E',
+          accent: '#5E6CE7',
+          muted: '#8D97BE',
+          vanilla: '#FDF8EC',
+          'vanilla-muted': '#D8CCA8',
         },
       },
     },

@@ -2,8 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
+@layer base {
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue', Arial, sans-serif;
+    background-color: #0B0D1B;
+    color: #FDF8EC;
+  }
+
+  ::selection {
+    background-color: #5E6CE7;
+    color: #FFFDF8;
+  }
+
+  /* Custom Midnight Indigo Scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0B0D1B;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2C3770;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #5E6CE7;
+  }
 }

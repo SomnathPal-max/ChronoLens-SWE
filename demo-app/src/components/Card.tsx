@@ -9,20 +9,20 @@ interface CardProps {
 }
 
 const priorityConfig: Record<PriorityLevel, { label: string; badge: string; iconColor: string }> = {
-  urgent: { label: 'Urgent', badge: 'bg-rose-950/60 text-rose-300 border-rose-700/50', iconColor: 'text-rose-400' },
-  high: { label: 'High', badge: 'bg-amber-950/60 text-amber-300 border-amber-700/50', iconColor: 'text-amber-400' },
-  medium: { label: 'Medium', badge: 'bg-blue-950/60 text-blue-300 border-blue-700/50', iconColor: 'text-blue-400' },
-  low: { label: 'Low', badge: 'bg-emerald-950/60 text-emerald-300 border-emerald-700/50', iconColor: 'text-emerald-400' },
+  urgent: { label: 'Urgent', badge: 'bg-rose-950/70 text-rose-200 border-rose-700/60', iconColor: 'text-rose-400' },
+  high: { label: 'High', badge: 'bg-amber-950/70 text-amber-200 border-amber-700/60', iconColor: 'text-amber-400' },
+  medium: { label: 'Medium', badge: 'bg-midnight-900 text-midnight-glow border-midnight-600/70', iconColor: 'text-midnight-glow' },
+  low: { label: 'Low', badge: 'bg-emerald-950/70 text-emerald-200 border-emerald-700/60', iconColor: 'text-emerald-400' },
 };
 
 const avatarColors: Record<string, string> = {
-  Alice: 'bg-indigo-600',
-  Bob: 'bg-emerald-600',
-  Carol: 'bg-purple-600',
-  Dave: 'bg-amber-600',
-  Eve: 'bg-rose-600',
-  Frank: 'bg-cyan-600',
-  Grace: 'bg-pink-600',
+  Alice: 'bg-midnight-indigo',
+  Bob: 'bg-emerald-700',
+  Carol: 'bg-purple-700',
+  Dave: 'bg-amber-700',
+  Eve: 'bg-rose-700',
+  Frank: 'bg-cyan-700',
+  Grace: 'bg-pink-700',
 };
 
 export const Card: React.FC<CardProps> = ({ card, onClick }) => {
@@ -37,7 +37,7 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
   };
 
   const pConfig = priorityConfig[card.priority] || priorityConfig.medium;
-  const avatarBg = avatarColors[card.assignee] || 'bg-slate-700';
+  const avatarBg = avatarColors[card.assignee] || 'bg-midnight-700';
 
   const completedSubtasks = card.subtasks ? card.subtasks.filter((s) => s.completed).length : 0;
   const totalSubtasks = card.subtasks ? card.subtasks.length : 0;
@@ -49,12 +49,12 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onClick={() => onClick(card)}
-      className="bg-slate-900/90 hover:bg-slate-800/90 rounded-xl shadow-sm hover:shadow-lg border border-slate-800 hover:border-slate-700 p-3.5 cursor-grab active:cursor-grabbing transition-all select-none group"
+      className="bg-midnight-800/95 hover:bg-midnight-750 rounded-xl shadow-sm hover:shadow-xl border border-midnight-700 hover:border-midnight-600 p-3.5 cursor-grab active:cursor-grabbing transition-all select-none group"
     >
       {/* Top Header: Issue Key, Priority & Due Date */}
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-1.5">
-          <span className="text-[11px] font-mono font-semibold text-slate-400 group-hover:text-indigo-400 transition-colors">
+          <span className="text-[11px] font-mono font-semibold text-vanilla-dim group-hover:text-midnight-glow transition-colors">
             {card.key || card.id.toUpperCase()}
           </span>
           <span className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium border ${pConfig.badge}`}>
@@ -64,20 +64,20 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
         </div>
 
         {card.dueDate && (
-          <span className="flex items-center gap-1 text-[11px] text-slate-400">
-            <CalendarIcon size={11} className="text-slate-400" />
+          <span className="flex items-center gap-1 text-[11px] text-vanilla-dim">
+            <CalendarIcon size={11} className="text-vanilla-dim" />
             <span>{card.dueDate}</span>
           </span>
         )}
       </div>
 
       {/* Title */}
-      <h3 className="text-sm font-semibold text-slate-100 group-hover:text-white leading-snug mb-1.5 transition-colors">
+      <h3 className="text-sm font-semibold text-vanilla-100 group-hover:text-vanilla-50 leading-snug mb-1.5 transition-colors">
         {card.title}
       </h3>
 
       {/* Description Snippet */}
-      <p className="text-xs text-slate-400 line-clamp-2 mb-3 leading-relaxed">
+      <p className="text-xs text-vanilla-muted line-clamp-2 mb-3 leading-relaxed">
         {card.description}
       </p>
 
@@ -87,7 +87,7 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
           {card.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-800 text-slate-300 border border-slate-700/60"
+              className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-midnight-900 text-vanilla-200 border border-midnight-700/80"
             >
               #{tag}
             </span>
@@ -96,12 +96,12 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
       )}
 
       {/* Card Footer: Subtasks, Comments & Assignee */}
-      <div className="flex items-center justify-between pt-2.5 border-t border-slate-800/80 text-[11px] text-slate-400">
+      <div className="flex items-center justify-between pt-2.5 border-t border-midnight-700/70 text-[11px] text-vanilla-dim">
         <div className="flex items-center gap-3">
           {totalSubtasks > 0 && (
             <span
               className={`flex items-center gap-1 ${
-                completedSubtasks === totalSubtasks ? 'text-emerald-400' : 'text-slate-400'
+                completedSubtasks === totalSubtasks ? 'text-emerald-400' : 'text-vanilla-muted'
               }`}
               title={`${completedSubtasks}/${totalSubtasks} subtasks completed`}
             >
@@ -113,7 +113,7 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
           )}
 
           {typeof card.commentsCount === 'number' && card.commentsCount > 0 && (
-            <span className="flex items-center gap-1 text-slate-400">
+            <span className="flex items-center gap-1 text-vanilla-muted">
               <MessageSquareIcon size={11} />
               <span>{card.commentsCount}</span>
             </span>
@@ -123,12 +123,12 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
         {/* Assignee Avatar */}
         <div className="flex items-center gap-1.5">
           <div
-            className={`w-5 h-5 rounded-full ${avatarBg} flex items-center justify-center text-[10px] text-white font-bold shadow-sm`}
+            className={`w-5 h-5 rounded-full ${avatarBg} flex items-center justify-center text-[10px] text-vanilla-50 font-bold shadow-sm`}
             title={`Assigned to ${card.assignee}`}
           >
             {card.assignee[0]}
           </div>
-          <span className="text-[11px] text-slate-400 font-medium">{card.assignee}</span>
+          <span className="text-[11px] text-vanilla-muted font-medium">{card.assignee}</span>
         </div>
       </div>
     </div>
