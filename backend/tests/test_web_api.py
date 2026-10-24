@@ -25,6 +25,27 @@ def test_root_route_serves_app_or_redirects(client: TestClient) -> None:
         assert "html" in res.headers.get("content-type", "").lower()
 
 
+def test_demo_route_serves_kanban_app(client: TestClient) -> None:
+    res = client.get("/demo/")
+    assert res.status_code == 200
+    assert "html" in res.headers.get("content-type", "").lower()
+
+
+def test_api_cards_endpoints(client: TestClient) -> None:
+    # 1. Get cards
+    res = client.get("/api/cards")
+    assert res.status_code == 200
+    cards = res.json()
+    assert len(cards) >= 7
+
+    # 2. Healthy move
+    res_move = client.post("/api/cards/card-1/move", json={"column": "inprogress"})
+    assert res_move.status_code == 200
+    updated_cards = res_move.json()
+    card1 = next(c for c in updated_cards if c["id"] == "card-1")
+    assert card1["column"] == "inprogress"
+
+
 def test_api_presets(client: TestClient) -> None:
     res = client.get("/api/presets")
     assert res.status_code == 200

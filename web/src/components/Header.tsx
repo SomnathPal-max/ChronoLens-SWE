@@ -1,5 +1,5 @@
 import React from 'react';
-import { BugIcon, ShieldCheckIcon, PlayIcon, RefreshCwIcon, WifiIcon } from './icons';
+import { BugIcon, ShieldCheckIcon, PlayIcon, RefreshCwIcon, WifiIcon, ExternalLinkIcon } from './icons';
 import { ScrubberSession } from '../types';
 
 interface HeaderProps {
@@ -64,6 +64,18 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Actions & Health Status */}
         <div className="flex items-center gap-3">
+          {/* Link to embedded Kanban Demo */}
+          <a
+            href="/demo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors border border-slate-700/60"
+            title="Open embedded Kanban test subject board"
+          >
+            <ExternalLinkIcon size={13} />
+            <span>Live Kanban App</span>
+          </a>
+
           {/* Backend Connection Badge */}
           <div
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border ${

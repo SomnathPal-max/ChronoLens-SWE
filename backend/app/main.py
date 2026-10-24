@@ -53,13 +53,77 @@ if _web_dist.exists():
         app.mount("/assets", StaticFiles(directory=str(_assets_dir)), name="web_assets")
     app.mount("/app", StaticFiles(directory=str(_web_dist), html=True), name="web_app")
 
+_demo_dist = _repo_root / "demo-app" / "dist"
+if _demo_dist.exists():
+    app.mount("/demo", StaticFiles(directory=str(_demo_dist), html=True), name="demo_app")
+
 
 # ---------------------------------------------------------------------------
-# In-memory run storage (will be replaced with a database in production)
+# In-memory run storage & Demo Kanban state
 # ---------------------------------------------------------------------------
 
 _runs: dict[str, dict[str, Any]] = {}
 _run_events: dict[str, list[dict[str, Any]]] = {}
+
+_INITIAL_CARDS: list[dict[str, Any]] = [
+    {
+        "id": "card-1",
+        "title": "Design login page",
+        "description": "Create wireframes and mockups for the login page.",
+        "column": "todo",
+        "priority": "high",
+        "assignee": "Alice",
+    },
+    {
+        "id": "card-2",
+        "title": "Setup CI/CD pipeline",
+        "description": "Configure GitHub Actions for build and deploy.",
+        "column": "todo",
+        "priority": "medium",
+        "assignee": "Bob",
+    },
+    {
+        "id": "card-3",
+        "title": "Write unit tests",
+        "description": "Add Jest tests for the auth module.",
+        "column": "todo",
+        "priority": "low",
+        "assignee": "Carol",
+    },
+    {
+        "id": "card-4",
+        "title": "API rate limiting",
+        "description": "Implement rate limiting middleware.",
+        "column": "inprogress",
+        "priority": "high",
+        "assignee": "Dave",
+    },
+    {
+        "id": "card-5",
+        "title": "Database migration",
+        "description": "Migrate user table to new schema.",
+        "column": "inprogress",
+        "priority": "medium",
+        "assignee": "Eve",
+    },
+    {
+        "id": "card-6",
+        "title": "Deploy staging",
+        "description": "Push latest build to staging environment.",
+        "column": "done",
+        "priority": "low",
+        "assignee": "Frank",
+    },
+    {
+        "id": "card-7",
+        "title": "Code review PR #42",
+        "description": "Review and approve the feature branch.",
+        "column": "done",
+        "priority": "medium",
+        "assignee": "Grace",
+    },
+]
+_server_cards: list[dict[str, Any]] = [dict(c) for c in _INITIAL_CARDS]
 
 
 # ---------------------------------------------------------------------------
@@ -67,7 +131,7 @@ _run_events: dict[str, list[dict[str, Any]]] = {}
 # ---------------------------------------------------------------------------
 
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 async def root() -> Any:
     """Root route: serves the web scrubber UI or redirects to /docs."""
     index_file = _web_dist / "index.html"
@@ -76,7 +140,7 @@ async def root() -> Any:
     return RedirectResponse(url="/docs")
 
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 async def health() -> dict[str, str]:
     """Health check endpoint.
 
@@ -84,6 +148,38 @@ async def health() -> dict[str, str]:
         Status and version information.
     """
     return {"status": "ok", "version": "0.1.0"}
+
+
+@app.get("/api/cards")
+async def get_cards() -> list[dict[str, Any]]:
+    """Return Kanban board cards."""
+    return [dict(c) for c in _server_cards]
+
+
+@app.post("/api/cards/{card_id}/move")
+async def move_card(
+    card_id: str,
+    payload: dict[str, Any],
+    bug: int | None = None,
+) -> list[dict[str, Any]]:
+    """Move a Kanban card. Injects 800ms delay and stale state if bug=1."""
+    target_column = payload.get("column", "todo")
+    stale_snapshot = [dict(c) for c in _server_cards]
+
+    found = False
+    for card in _server_cards:
+        if card["id"] == card_id:
+            card["column"] = target_column
+            found = True
+            break
+    if not found:
+        raise HTTPException(status_code=404, detail=f"Card {card_id} not found")
+
+    if bug == 1:
+        await asyncio.sleep(0.8)
+        return stale_snapshot
+
+    return [dict(c) for c in _server_cards]
 
 
 @app.get("/api/presets")
