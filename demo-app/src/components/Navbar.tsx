@@ -38,7 +38,6 @@ export const Navbar: React.FC<NavbarProps> = ({ filters, onFilterChange }) => {
           <div className="flex items-center gap-2 font-semibold text-sm tracking-tight text-vanilla-100">
             <span className="w-2.5 h-2.5 rounded-full bg-midnight-indigo shadow-[0_0_8px_rgba(94,108,231,0.6)]"></span>
             <span>ChronoLens Kanban</span>
-            <span className="text-vanilla-dim text-xs font-normal">Midnight Indigo & Vanilla</span>
           </div>
 
           {/* Search Bar */}

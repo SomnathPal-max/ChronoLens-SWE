@@ -44,7 +44,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeBugCount, onBugConfigCha
           {!isCollapsed && (
             <div className="truncate">
               <div className="font-semibold text-vanilla-100 text-sm tracking-tight truncate">Acme Core Platform</div>
-              <div className="text-[10px] text-midnight-glow font-medium">Sprint 42 · Midnight & Vanilla</div>
+              <div className="text-[10px] text-midnight-glow font-medium">Sprint 42</div>
             </div>
           )}
         </div>

@@ -30,9 +30,6 @@ export const Header: React.FC<HeaderProps> = ({
               <h1 className="text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
                 ChronoLens<span className="text-indigo-400 font-semibold">-SWE</span>
               </h1>
-              <span className="px-2 py-0.5 text-[11px] font-semibold bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/20">
-                Meta Hackathon · Indie Track
-              </span>
             </div>
             <p className="text-xs text-slate-400">
               Frame-by-Frame AI Visual Regression Debugger · SAM 3.1 &amp; Muse Wonder
