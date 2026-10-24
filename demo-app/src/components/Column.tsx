@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import type { CardData, ColumnId } from '../types';
 import { Card } from './Card';
+import { PlusIcon } from './icons';
 import { getBugConfig, recordGroundTruth } from '../bugs';
 
 interface ColumnProps {
@@ -14,10 +15,10 @@ interface ColumnProps {
   onAddCard?: () => void;
 }
 
-const columnColors: Record<ColumnId, { header: string; dot: string }> = {
-  todo: { header: 'text-blue-700', dot: 'bg-blue-500' },
-  inprogress: { header: 'text-amber-700', dot: 'bg-amber-500' },
-  done: { header: 'text-green-700', dot: 'bg-green-500' },
+const columnMeta: Record<ColumnId, { dot: string; text: string; bg: string }> = {
+  todo: { dot: 'bg-indigo-400', text: 'text-indigo-300', bg: 'bg-indigo-500/10' },
+  inprogress: { dot: 'bg-amber-400', text: 'text-amber-300', bg: 'bg-amber-500/10' },
+  done: { dot: 'bg-emerald-400', text: 'text-emerald-300', bg: 'bg-emerald-500/10' },
 };
 
 export const Column: React.FC<ColumnProps> = ({
@@ -79,52 +80,58 @@ export const Column: React.FC<ColumnProps> = ({
     onAddCard?.();
   };
 
+  const meta = columnMeta[id] || columnMeta.todo;
+
   return (
     <div
       data-cl={dataCl}
-      className={`flex flex-col bg-gray-100 rounded-xl min-w-[280px] w-full max-w-sm transition-colors ${
-        isDragOver ? 'bg-blue-50 ring-2 ring-blue-300' : ''
+      className={`flex flex-col bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-slate-800/80 min-w-[300px] w-full max-w-sm transition-all duration-150 ${
+        isDragOver ? 'ring-2 ring-indigo-500/60 bg-indigo-950/20' : ''
       }`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      {/* Column header */}
-      <div className="px-4 py-3 flex items-center justify-between">
+      {/* Column Header */}
+      <div className="px-4 py-3.5 border-b border-slate-800/80 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className={`w-3 h-3 rounded-full ${columnColors[id].dot}`} />
-          <h2 className={`font-bold text-sm uppercase tracking-wider ${columnColors[id].header}`}>
+          <span className={`w-2 h-2 rounded-full ${meta.dot} shadow-sm`} />
+          <h2 className={`font-semibold text-xs tracking-wider uppercase ${meta.text}`}>
             {title}
           </h2>
+          <span className="text-[11px] font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full font-medium">
+            {cards.length}
+          </span>
         </div>
-        <span className="text-xs text-gray-400 bg-gray-200 px-2 py-0.5 rounded-full font-medium">
-          {cards.length}
-        </span>
-      </div>
 
-      {/* Cards list */}
-      <div className="flex-1 px-3 pb-3 space-y-3 min-h-[120px]">
-        {cards.map((card) => (
-          <Card key={card.id} card={card} onClick={onCardClick} />
-        ))}
-      </div>
-
-      {/* Add card button */}
-      {id === 'todo' && (
-        <div className="px-3 pb-3">
+        {/* Add Card action button (for Bug 3 testing and creation) */}
+        {id === 'todo' && (
           <button
             data-cl="add-card-btn"
             onClick={handleAddClick}
-            className="w-full text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded-lg py-2 transition-colors flex items-center justify-center gap-1"
             style={addBtnStyle}
+            className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white border border-indigo-500/40 transition-colors"
+            title="Add a new card to To Do"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-            </svg>
-            Add New Card
+            <PlusIcon size={12} />
+            <span>+ Add New Card</span>
           </button>
-        </div>
-      )}
+        )}
+      </div>
+
+      {/* Cards Scroll Area */}
+      <div className="flex-1 p-3 space-y-3 overflow-y-auto min-h-[450px]">
+        {cards.map((card) => (
+          <Card key={card.id} card={card} onClick={onCardClick} />
+        ))}
+
+        {cards.length === 0 && (
+          <div className="h-40 flex flex-col items-center justify-center border-2 border-dashed border-slate-800 rounded-xl text-slate-600 text-xs">
+            <span>No issues in {title}</span>
+            <span className="text-[10px] text-slate-600 mt-1">Drag an issue here</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

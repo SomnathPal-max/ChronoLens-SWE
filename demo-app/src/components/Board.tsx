@@ -8,15 +8,16 @@ import { getBugConfig, recordGroundTruth } from '../bugs';
 interface BoardProps {
   getCardsByColumn: (column: ColumnId) => CardData[];
   moveCard: (cardId: string, targetColumn: ColumnId) => void;
+  onAddCard?: () => void;
 }
 
 const COLUMNS: ColumnData[] = [
-  { id: 'todo', title: 'To Do', dataCl: 'column-todo' },
-  { id: 'inprogress', title: 'In Progress', dataCl: 'column-inprogress' },
-  { id: 'done', title: 'Done', dataCl: 'column-done' },
+  { id: 'todo', title: 'To Do', dataCl: 'column-todo', badgeColor: 'border-indigo-500' },
+  { id: 'inprogress', title: 'In Progress', dataCl: 'column-inprogress', badgeColor: 'border-amber-500' },
+  { id: 'done', title: 'Done', dataCl: 'column-done', badgeColor: 'border-emerald-500' },
 ];
 
-export const Board: React.FC<BoardProps> = ({ getCardsByColumn, moveCard }) => {
+export const Board: React.FC<BoardProps> = ({ getCardsByColumn, moveCard, onAddCard }) => {
   const [selectedCard, setSelectedCard] = useState<CardData | null>(null);
   const cfg = getBugConfig();
 
@@ -48,10 +49,10 @@ export const Board: React.FC<BoardProps> = ({ getCardsByColumn, moveCard }) => {
   return (
     <div
       data-cl="kanban-board"
-      className="flex-1 p-6 overflow-x-auto"
+      className="flex-1 p-6 overflow-x-auto bg-slate-950 min-h-[calc(100vh-3.5rem)]"
       style={boardContainerStyle}
     >
-      <div className="flex gap-6 max-w-7xl mx-auto justify-center">
+      <div className="flex gap-6 max-w-7xl mx-auto justify-start lg:justify-center items-start">
         {COLUMNS.map((col) => (
           <Column
             key={col.id}
@@ -61,6 +62,7 @@ export const Board: React.FC<BoardProps> = ({ getCardsByColumn, moveCard }) => {
             cards={getCardsByColumn(col.id)}
             onDrop={handleDrop}
             onCardClick={handleCardClick}
+            onAddCard={onAddCard}
           />
         ))}
       </div>
