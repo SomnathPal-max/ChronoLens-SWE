@@ -38,13 +38,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeBugCount, onBugConfigCha
       {/* Workspace Brand */}
       <div className="h-14 border-b border-midnight-700/70 flex items-center justify-between px-4">
         <div className="flex items-center gap-2.5 overflow-hidden">
-          <div className="w-7 h-7 rounded-lg bg-midnight-indigo flex items-center justify-center text-vanilla-50 font-bold text-sm shadow-[0_0_12px_rgba(94,108,231,0.35)] flex-shrink-0">
+          <div className="w-7 h-7 rounded bg-amber-brand flex items-center justify-center text-obsidian-canvas font-bold text-xs shadow-sm flex-shrink-0">
             ▲
           </div>
           {!isCollapsed && (
             <div className="truncate">
               <div className="font-semibold text-vanilla-100 text-sm tracking-tight truncate">Acme Core Platform</div>
-              <div className="text-[10px] text-midnight-glow font-medium">Sprint 42</div>
+              <div className="text-[10px] text-amber-brand font-mono font-medium">Sprint 42</div>
             </div>
           )}
         </div>
@@ -61,20 +61,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeBugCount, onBugConfigCha
       <div className="flex-1 py-4 px-2 space-y-6 overflow-y-auto">
         <div>
           {!isCollapsed && (
-            <div className="px-2 mb-1.5 text-[10px] font-bold tracking-wider text-vanilla-dim uppercase">
+            <div className="px-2 mb-1.5 text-[10px] font-bold tracking-wider text-vanilla-dim uppercase font-mono">
               Views
             </div>
           )}
           <div className="space-y-1">
-            <button className="w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-midnight-850 text-vanilla-100 border border-midnight-600/50 shadow-sm">
-              <LayoutGridIcon size={15} className="text-midnight-glow" />
+            <button className="w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded text-xs font-semibold bg-midnight-850 text-vanilla-100 border border-midnight-700 shadow-sm">
+              <LayoutGridIcon size={15} className="text-amber-brand" />
               {!isCollapsed && <span>Board</span>}
             </button>
-            <button className="w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-vanilla-muted hover:bg-midnight-900 hover:text-vanilla-100 transition-colors">
+            <button className="w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded text-xs font-medium text-vanilla-muted hover:bg-midnight-900 hover:text-vanilla-100 transition-colors">
               <ListTodoIcon size={15} />
               {!isCollapsed && <span>List</span>}
             </button>
-            <button className="w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-vanilla-muted hover:bg-midnight-900 hover:text-vanilla-100 transition-colors">
+            <button className="w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded text-xs font-medium text-vanilla-muted hover:bg-midnight-900 hover:text-vanilla-100 transition-colors">
               <LayersIcon size={15} />
               {!isCollapsed && <span>Roadmap</span>}
             </button>
@@ -153,19 +153,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeBugCount, onBugConfigCha
         {/* ChronoLens Scrubber Link */}
         <div>
           {!isCollapsed && (
-            <div className="px-2 mb-1.5 text-[10px] font-bold tracking-wider text-vanilla-dim uppercase">
+            <div className="px-2 mb-1.5 text-[10px] font-bold tracking-wider text-vanilla-dim uppercase font-mono">
               Telemetry
             </div>
           )}
           <a
             href="/"
-            className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-medium bg-midnight-900/90 text-vanilla-200 border border-midnight-indigo/40 hover:bg-midnight-850 hover:border-midnight-indigo transition-colors"
+            className="w-full flex items-center gap-2 px-2.5 py-2 rounded text-xs font-medium bg-midnight-900 text-vanilla-100 border border-amber-brand/30 hover:bg-midnight-850 hover:border-amber-brand/60 transition-colors"
           >
-            <SparklesIcon size={14} className="text-midnight-glow" />
+            <SparklesIcon size={14} className="text-amber-brand" />
             {!isCollapsed && (
               <div className="flex items-center justify-between flex-1">
                 <span>ChronoLens Scrubber</span>
-                <span className="text-vanilla-dim text-[10px]">/</span>
+                <span className="text-vanilla-dim text-[10px] font-mono">/</span>
               </div>
             )}
           </a>

@@ -31,15 +31,17 @@ export const TimelineScrubber: React.FC<TimelineScrubberProps> = ({
   const progressPercent = Math.min(100, Math.max(0, (currentTimestampMs / totalDurationMs) * 100));
 
   return (
-    <div className="bg-[#111622] rounded-2xl border border-slate-800/80 p-4 shadow-xl flex flex-col gap-3">
+    <div className="bg-obsidian-surface rounded-xl border border-obsidian-subtle p-3.5 shadow-xl flex flex-col gap-2.5">
       {/* Timeline Header */}
-      <div className="flex items-center justify-between text-xs font-semibold text-slate-300">
+      <div className="flex items-center justify-between text-xs font-medium text-ink-secondary">
         <div className="flex items-center gap-2">
-          <ActivityIcon size={14} className="text-indigo-400" />
-          <span>Synchronized Multi-Track Scrubber</span>
+          <ActivityIcon size={13} className="text-amber-brand" />
+          <span className="font-mono text-xs uppercase tracking-wider text-ink-primary font-semibold">
+            Telemetry Multi-Track
+          </span>
         </div>
-        <div className="text-[11px] text-slate-400 font-mono">
-          Hover / Click any track to seek · Current: {currentTimestampMs}ms
+        <div className="text-[11px] text-ink-tertiary font-mono">
+          SEEK: <span className="text-amber-brand font-bold">{Math.round(currentTimestampMs)}ms</span> / {totalDurationMs}ms
         </div>
       </div>
 
@@ -47,39 +49,39 @@ export const TimelineScrubber: React.FC<TimelineScrubberProps> = ({
       <div
         ref={timelineRef}
         onClick={handleTimelineClick}
-        className="relative bg-[#0b0e17] rounded-xl border border-slate-800 p-3 flex flex-col gap-3 cursor-pointer select-none overflow-hidden"
+        className="relative bg-obsidian-canvas rounded-lg border border-obsidian-subtle p-2.5 flex flex-col gap-2 cursor-pointer select-none overflow-hidden"
       >
-        {/* Playhead Scrub Line */}
+        {/* Playhead Scrub Needle */}
         <div
           className="absolute top-0 bottom-0 z-30 pointer-events-none transition-all flex flex-col items-center"
           style={{ left: `${progressPercent}%` }}
         >
-          <div className="w-3 h-3 bg-indigo-500 rounded-full shadow-lg shadow-indigo-500/50 -mt-1 ring-2 ring-white" />
-          <div className="w-0.5 flex-1 bg-indigo-500 shadow-sm" />
+          <div className="w-2.5 h-2.5 bg-amber-brand rotate-45 shadow-sm -mt-1 ring-1 ring-obsidian-canvas" />
+          <div className="w-[1.5px] flex-1 bg-amber-brand" />
         </div>
 
-        {/* Track 1: Time Ticks & Ruler */}
-        <div className="relative h-6 border-b border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-500 px-1">
-          <span>0.0s</span>
-          <span>0.5s</span>
-          <span>1.0s</span>
-          <span>1.5s</span>
-          <span>2.0s</span>
-          <span>2.5s</span>
-          <span>3.0s</span>
+        {/* Track 1: Time Ticks & Ruler (Oscilloscope style) */}
+        <div className="relative h-5 border-b border-obsidian-subtle flex items-center justify-between text-[10px] font-mono text-ink-tertiary px-1">
+          <span>0.00s</span>
+          <span>0.50s</span>
+          <span>1.00s</span>
+          <span>1.50s</span>
+          <span>2.00s</span>
+          <span>2.50s</span>
+          <span>3.00s</span>
         </div>
 
         {/* Track 2: Anomalies Track */}
         <div className="flex items-center gap-2">
-          <div className="w-24 flex items-center gap-1.5 text-[11px] font-medium text-rose-400 shrink-0">
-            <AlertTriangleIcon size={13} />
+          <div className="w-24 flex items-center gap-1.5 text-[10px] font-mono font-medium text-rose-400 shrink-0 uppercase">
+            <AlertTriangleIcon size={12} />
             <span>Anomalies</span>
           </div>
-          <div className="relative flex-1 h-7 bg-slate-900/60 rounded-lg border border-slate-800/70 overflow-hidden">
+          <div className="relative flex-1 h-6 bg-obsidian-panel rounded border border-obsidian-subtle/80 overflow-hidden">
             {anomalies.map((anom, idx) => {
               const leftPercent = (anom.t_start_ms / totalDurationMs) * 100;
               const widthPercent = Math.max(
-                4,
+                5,
                 ((anom.t_end_ms - anom.t_start_ms) / totalDurationMs) * 100
               );
 
@@ -90,11 +92,11 @@ export const TimelineScrubber: React.FC<TimelineScrubberProps> = ({
                     e.stopPropagation();
                     onSeekMs(anom.t_start_ms);
                   }}
-                  className="absolute top-1 bottom-1 bg-rose-500/80 hover:bg-rose-500 text-white text-[10px] font-bold px-2 rounded flex items-center gap-1 shadow-md shadow-rose-500/30 transition-transform hover:scale-105 z-10"
+                  className="absolute top-0.5 bottom-0.5 bg-rose-500/90 hover:bg-rose-400 text-white text-[9px] font-mono font-bold px-1.5 rounded-sm flex items-center gap-1 shadow-sm transition-transform hover:scale-[1.02] z-10"
                   style={{ left: `${leftPercent}%`, width: `${widthPercent}%` }}
                   title={`${anom.type.toUpperCase()}: ${anom.details} (Click to jump)`}
                 >
-                  <span className="truncate">{anom.type}</span>
+                  <span className="truncate uppercase">{anom.type}</span>
                 </div>
               );
             })}
@@ -103,19 +105,19 @@ export const TimelineScrubber: React.FC<TimelineScrubberProps> = ({
 
         {/* Track 3: DOM Probe Mutations Track */}
         <div className="flex items-center gap-2">
-          <div className="w-24 flex items-center gap-1.5 text-[11px] font-medium text-sky-400 shrink-0">
-            <ActivityIcon size={13} />
+          <div className="w-24 flex items-center gap-1.5 text-[10px] font-mono font-medium text-sky-400 shrink-0 uppercase">
+            <ActivityIcon size={12} />
             <span>DOM Probe</span>
           </div>
-          <div className="relative flex-1 h-6 bg-slate-900/60 rounded-lg border border-slate-800/70 overflow-hidden flex items-center px-2">
+          <div className="relative flex-1 h-5 bg-obsidian-panel rounded border border-obsidian-subtle/80 overflow-hidden flex items-center px-1">
             {/* Render probe mutation markers across the duration */}
             {session.frames.map((frame, i) => {
-              if (i % 6 !== 0) return null; // sample ticks
+              if (i % 4 !== 0) return null; // sample ticks
               const pos = (frame.t_ms / totalDurationMs) * 100;
               return (
                 <div
                   key={i}
-                  className="absolute top-1.5 bottom-1.5 w-0.5 bg-sky-500/40 rounded-full"
+                  className="absolute top-1 bottom-1 w-[1px] bg-sky-400/40"
                   style={{ left: `${pos}%` }}
                   title={`DOM frame ${frame.frame_index} (${frame.probe_elements.length} tracked elements)`}
                 />
@@ -126,15 +128,15 @@ export const TimelineScrubber: React.FC<TimelineScrubberProps> = ({
 
         {/* Track 4: HAR Network Requests Track */}
         <div className="flex items-center gap-2">
-          <div className="w-24 flex items-center gap-1.5 text-[11px] font-medium text-emerald-400 shrink-0">
-            <WifiIcon size={13} />
+          <div className="w-24 flex items-center gap-1.5 text-[10px] font-mono font-medium text-emerald-400 shrink-0 uppercase">
+            <WifiIcon size={12} />
             <span>Network HAR</span>
           </div>
-          <div className="relative flex-1 h-7 bg-slate-900/60 rounded-lg border border-slate-800/70 overflow-hidden">
+          <div className="relative flex-1 h-6 bg-obsidian-panel rounded border border-obsidian-subtle/80 overflow-hidden">
             {harEntries.map((entry) => {
               const leftPercent = (entry.started_ms / totalDurationMs) * 100;
               const widthPercent = Math.max(
-                6,
+                8,
                 (entry.duration_ms / totalDurationMs) * 100
               );
 
@@ -145,17 +147,17 @@ export const TimelineScrubber: React.FC<TimelineScrubberProps> = ({
                     e.stopPropagation();
                     onSeekMs(entry.started_ms);
                   }}
-                  className={`absolute top-1 bottom-1 rounded px-2 text-[10px] font-semibold flex items-center gap-1 shadow-sm transition-transform hover:scale-105 z-10 ${
+                  className={`absolute top-0.5 bottom-0.5 rounded-sm px-1.5 text-[9px] font-mono font-semibold flex items-center gap-1 transition-transform hover:scale-[1.02] z-10 ${
                     entry.duration_ms > 400
-                      ? 'bg-amber-500/80 hover:bg-amber-500 text-slate-950'
-                      : 'bg-emerald-500/70 hover:bg-emerald-500 text-white'
+                      ? 'bg-amber-brand text-obsidian-canvas'
+                      : 'bg-emerald-600/80 hover:bg-emerald-500 text-white'
                   }`}
                   style={{ left: `${leftPercent}%`, width: `${widthPercent}%` }}
                   title={`${entry.method} ${entry.url} - ${entry.duration_ms}ms (Click to seek)`}
                 >
-                  <span className="font-mono text-[9px]">{entry.method}</span>
+                  <span>{entry.method}</span>
                   <span className="truncate">{entry.url.split('/').pop()}</span>
-                  <span className="font-mono text-[9px] opacity-80">({entry.duration_ms}ms)</span>
+                  <span className="opacity-80">({entry.duration_ms}ms)</span>
                 </div>
               );
             })}

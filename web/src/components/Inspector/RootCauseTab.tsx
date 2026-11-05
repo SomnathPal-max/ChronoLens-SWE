@@ -3,7 +3,6 @@ import {
   FileCodeIcon,
   ShieldCheckIcon,
   CheckCircleIcon,
-  AlertTriangleIcon,
   CopyIcon,
   LayersIcon,
 } from '../icons';
@@ -20,155 +19,174 @@ export const RootCauseTab: React.FC<RootCauseTabProps> = ({
   rootCause,
   patch,
   verification,
-  beforeAfterUrl,
 }) => {
-  const [copied, setCopied] = useState<boolean>(false);
+  const [copiedDiff, setCopiedDiff] = useState<boolean>(false);
+  const [copiedBranch, setCopiedBranch] = useState<boolean>(false);
 
   const handleCopyDiff = () => {
     navigator.clipboard.writeText(patch.diff);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setCopiedDiff(true);
+    setTimeout(() => setCopiedDiff(false), 2000);
+  };
+
+  const handleCopyBranch = () => {
+    navigator.clipboard.writeText(`git checkout ${patch.branch}`);
+    setCopiedBranch(true);
+    setTimeout(() => setCopiedBranch(false), 2000);
   };
 
   return (
-    <div className="flex flex-col gap-6 text-sm">
+    <div className="flex flex-col gap-4 text-xs font-sans">
       {/* Root Cause Hypothesis Card */}
-      <div className="bg-[#141b2d] rounded-xl border border-slate-800 p-4 shadow-sm flex flex-col gap-3">
+      <div className="bg-obsidian-panel rounded-lg border border-obsidian-subtle p-3.5 flex flex-col gap-2.5">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-indigo-400 font-semibold text-xs tracking-wider uppercase">
-            <LayersIcon size={14} />
+          <div className="flex items-center gap-1.5 text-amber-brand font-mono font-semibold text-[11px] uppercase tracking-wider">
+            <LayersIcon size={13} />
             <span>Muse Wonder 1.0 Root Cause Analysis</span>
           </div>
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-            Confidence: {Math.round(rootCause.confidence * 100)}%
+          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-950/40 text-emerald-400 border border-emerald-800/40">
+            CONFIDENCE: {Math.round(rootCause.confidence * 100)}%
           </span>
         </div>
 
-        <p className="text-slate-100 font-medium leading-relaxed">{rootCause.hypothesis}</p>
+        <p className="text-ink-primary font-medium leading-relaxed text-xs">
+          {rootCause.hypothesis}
+        </p>
 
         {/* Target Files Badge */}
-        <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-800/80">
-          <span className="text-xs text-slate-400">Target File:</span>
+        <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-obsidian-subtle">
+          <span className="text-[11px] font-mono text-ink-tertiary">TARGET:</span>
           {rootCause.files.map((file, i) => (
             <div
               key={i}
-              className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-800/80 text-xs font-mono text-indigo-300 border border-slate-700/60"
+              className="flex items-center gap-1 px-2 py-0.5 rounded bg-obsidian-canvas text-[11px] font-mono text-ink-primary border border-obsidian-subtle"
             >
-              <FileCodeIcon size={12} />
+              <FileCodeIcon size={11} className="text-amber-brand" />
               <span>{file.path}</span>
-              <span className="text-slate-500">({file.lines})</span>
+              <span className="text-ink-dim">({file.lines})</span>
             </div>
           ))}
         </div>
 
         {/* Falsifiable Check */}
-        <div className="bg-[#0e1320] rounded-lg p-3 border border-slate-800/80 text-xs flex flex-col gap-1">
-          <span className="text-slate-400 font-semibold">Falsifiable Verification Hypothesis:</span>
-          <span className="text-slate-300 font-mono">{rootCause.falsifiable_check}</span>
+        <div className="bg-obsidian-canvas rounded p-2.5 border border-obsidian-subtle/80 flex flex-col gap-1 font-mono text-[11px]">
+          <span className="text-ink-tertiary uppercase text-[10px] font-semibold">Falsifiable Hypothesis Check:</span>
+          <span className="text-ink-secondary">{rootCause.falsifiable_check}</span>
         </div>
       </div>
 
       {/* 5-Run Verification Card */}
-      <div className="bg-[#141b2d] rounded-xl border border-slate-800 p-4 shadow-sm flex flex-col gap-3">
+      <div className="bg-obsidian-panel rounded-lg border border-obsidian-subtle p-3.5 flex flex-col gap-2.5">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-emerald-400 font-semibold text-xs tracking-wider uppercase">
-            <ShieldCheckIcon size={14} />
-            <span>Multi-Run Verification Gate</span>
+          <div className="flex items-center gap-1.5 text-emerald-400 font-mono font-semibold text-[11px] uppercase tracking-wider">
+            <ShieldCheckIcon size={13} />
+            <span>Rule 8 Multi-Run Verification Gate</span>
           </div>
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            Stability: {verification.stability_score}
+          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950/50 text-emerald-300 border border-emerald-800/50">
+            STABILITY: {verification.stability_score}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
-          <div className="bg-[#0e1320] p-2.5 rounded-lg border border-slate-800">
-            <div className="text-[11px] text-slate-400 mb-0.5">Runs Passed</div>
-            <div className="text-base font-bold text-emerald-400">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-center font-mono">
+          <div className="bg-obsidian-canvas p-2 rounded border border-obsidian-subtle">
+            <div className="text-[10px] text-ink-tertiary mb-0.5">RUNS PASSED</div>
+            <div className="text-sm font-bold text-emerald-400">
               {verification.passes} / {verification.runs}
             </div>
           </div>
-          <div className="bg-[#0e1320] p-2.5 rounded-lg border border-slate-800">
-            <div className="text-[11px] text-slate-400 mb-0.5">Median Shape IoU</div>
-            <div className="text-base font-bold text-sky-400">
+          <div className="bg-obsidian-canvas p-2 rounded border border-obsidian-subtle">
+            <div className="text-[10px] text-ink-tertiary mb-0.5">MEDIAN IoU</div>
+            <div className="text-sm font-bold text-sky-400">
               {verification.median_shape_iou.toFixed(2)}
             </div>
           </div>
-          <div className="bg-[#0e1320] p-2.5 rounded-lg border border-slate-800">
-            <div className="text-[11px] text-slate-400 mb-0.5">Signature Reappeared</div>
-            <div className="text-base font-bold text-emerald-400">
-              {verification.signature_absent_in_all ? '0 / 5' : 'Yes'}
+          <div className="bg-obsidian-canvas p-2 rounded border border-obsidian-subtle">
+            <div className="text-[10px] text-ink-tertiary mb-0.5">SIGNATURE REAPPEARED</div>
+            <div className="text-sm font-bold text-emerald-400">
+              {verification.signature_absent_in_all ? '0 / 5' : 'REGRESSED'}
             </div>
           </div>
-          <div className="bg-[#0e1320] p-2.5 rounded-lg border border-slate-800">
-            <div className="text-[11px] text-slate-400 mb-0.5">New Anomaly Types</div>
-            <div className="text-base font-bold text-emerald-400">
+          <div className="bg-obsidian-canvas p-2 rounded border border-obsidian-subtle">
+            <div className="text-[10px] text-ink-tertiary mb-0.5">NEW ANOMALIES</div>
+            <div className="text-sm font-bold text-emerald-400">
               {verification.new_anomaly_types.length}
             </div>
           </div>
         </div>
 
         {/* 5-Run Visual Indicators */}
-        <div className="flex items-center gap-2 pt-1">
-          <span className="text-xs text-slate-400 mr-1">Run Checks:</span>
+        <div className="flex items-center gap-1.5 pt-1">
+          <span className="text-[10px] font-mono text-ink-tertiary mr-1">GATE RUNS:</span>
           {verification.run_details.map((run) => (
             <div
               key={run.run_index}
-              className="flex-1 py-1 px-2 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold flex items-center justify-center gap-1"
+              className="flex-1 py-1 px-1.5 rounded bg-emerald-950/30 border border-emerald-800/40 text-emerald-400 text-[10px] font-mono font-semibold flex items-center justify-center gap-1"
             >
-              <CheckCircleIcon size={12} />
-              <span>Run {run.run_index}</span>
+              <CheckCircleIcon size={11} />
+              <span>RUN {run.run_index}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Synthesized Patch Unified Diff Viewer */}
-      <div className="bg-[#141b2d] rounded-xl border border-slate-800 shadow-sm flex flex-col overflow-hidden">
-        <div className="px-4 py-2.5 bg-[#0f1422] border-b border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs">
-            <FileCodeIcon size={14} className="text-indigo-400" />
-            <span className="font-semibold text-slate-200">Synthesized Worktree Patch</span>
-            <span className="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 text-[10px] font-mono border border-indigo-500/20">
+      <div className="bg-obsidian-panel rounded-lg border border-obsidian-subtle overflow-hidden flex flex-col">
+        <div className="px-3.5 py-2 bg-obsidian-elevated border-b border-obsidian-subtle flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <FileCodeIcon size={13} className="text-amber-brand" />
+            <span className="font-mono text-xs font-semibold text-ink-primary">Synthesized Worktree Patch</span>
+            <span className="px-1.5 py-0.5 rounded bg-obsidian-canvas text-ink-secondary text-[10px] font-mono border border-obsidian-subtle">
               {patch.branch}
             </span>
           </div>
 
-          <button
-            onClick={handleCopyDiff}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300 transition-colors"
-          >
-            <CopyIcon size={12} />
-            <span>{copied ? 'Copied!' : 'Copy Diff'}</span>
-          </button>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={handleCopyBranch}
+              className="flex items-center gap-1 px-2 py-0.5 rounded bg-obsidian-canvas hover:bg-obsidian-subtle text-[10px] font-mono text-ink-secondary hover:text-ink-primary border border-obsidian-subtle transition-colors"
+              title="Copy git checkout command"
+            >
+              <span>{copiedBranch ? 'Copied command!' : 'checkout branch'}</span>
+            </button>
+
+            <button
+              onClick={handleCopyDiff}
+              className="flex items-center gap-1 px-2 py-0.5 rounded bg-amber-brand hover:bg-amber-hover text-[10px] font-semibold text-obsidian-canvas transition-colors"
+            >
+              <CopyIcon size={10} className="fill-current" />
+              <span>{copiedDiff ? 'Copied!' : 'Copy Diff'}</span>
+            </button>
+          </div>
         </div>
 
-        <p className="px-4 py-2.5 text-xs text-slate-300 border-b border-slate-800/80 bg-[#121828]">
-          <span className="font-semibold text-slate-400">Rationale: </span>
+        <p className="px-3.5 py-2 text-[11px] text-ink-secondary border-b border-obsidian-subtle bg-obsidian-panel/60">
+          <span className="font-semibold text-ink-primary">Rationale: </span>
           {patch.rationale}
         </p>
 
-        {/* Unified Diff View */}
-        <div className="p-4 bg-[#0a0d14] overflow-x-auto font-mono text-xs leading-relaxed max-h-96">
+        {/* GitHub Unified Diff View */}
+        <div className="p-3 bg-obsidian-canvas overflow-x-auto font-mono text-[11px] leading-relaxed max-h-80">
           {patch.diff.split('\n').map((line, idx) => {
-            let lineClass = 'text-slate-400';
+            let lineClass = 'text-ink-tertiary';
             let bgClass = '';
 
             if (line.startsWith('+++') || line.startsWith('---')) {
-              lineClass = 'text-slate-200 font-bold';
+              lineClass = 'text-ink-primary font-bold';
             } else if (line.startsWith('@@')) {
-              lineClass = 'text-purple-400 font-semibold';
-              bgClass = 'bg-purple-950/20';
+              lineClass = 'text-amber-brand font-semibold';
+              bgClass = 'bg-amber-brand/10';
             } else if (line.startsWith('+')) {
               lineClass = 'text-emerald-400';
-              bgClass = 'bg-emerald-950/30';
+              bgClass = 'bg-emerald-950/40';
             } else if (line.startsWith('-')) {
               lineClass = 'text-rose-400';
-              bgClass = 'bg-rose-950/30';
+              bgClass = 'bg-rose-950/40';
             }
 
             return (
-              <div key={idx} className={`${lineClass} ${bgClass} px-2 py-0.5 rounded-sm`}>
-                {line || ' '}
+              <div key={idx} className={`${lineClass} ${bgClass} px-2 py-0.5 rounded-xs flex gap-2`}>
+                <span className="w-6 text-right select-none opacity-40 text-[10px]">{idx + 1}</span>
+                <span className="flex-1">{line || ' '}</span>
               </div>
             );
           })}

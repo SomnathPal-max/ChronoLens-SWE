@@ -10,10 +10,10 @@ interface ModalProps {
 }
 
 const priorityConfig: Record<PriorityLevel, { label: string; badge: string; iconColor: string }> = {
-  urgent: { label: 'Urgent', badge: 'bg-rose-950/70 text-rose-200 border-rose-700/60', iconColor: 'text-rose-400' },
-  high: { label: 'High', badge: 'bg-amber-950/70 text-amber-200 border-amber-700/60', iconColor: 'text-amber-400' },
-  medium: { label: 'Medium', badge: 'bg-midnight-900 text-midnight-glow border-midnight-600/70', iconColor: 'text-midnight-glow' },
-  low: { label: 'Low', badge: 'bg-emerald-950/70 text-emerald-200 border-emerald-700/60', iconColor: 'text-emerald-400' },
+  urgent: { label: 'Urgent', badge: 'bg-rose-500/10 text-rose-400 border-rose-500/20', iconColor: 'text-rose-400' },
+  high: { label: 'High', badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20', iconColor: 'text-amber-400' },
+  medium: { label: 'Medium', badge: 'bg-sky-500/10 text-sky-400 border-sky-500/20', iconColor: 'text-sky-400' },
+  low: { label: 'Low', badge: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20', iconColor: 'text-emerald-400' },
 };
 
 export const Modal: React.FC<ModalProps> = ({ card, onClose }) => {
@@ -65,7 +65,7 @@ export const Modal: React.FC<ModalProps> = ({ card, onClose }) => {
     >
       <div
         data-cl="modal"
-        className="bg-midnight-900 border border-midnight-600 rounded-2xl shadow-2xl max-w-xl w-full p-6 relative text-vanilla-100 my-8 shadow-[0_20px_50px_rgba(11,13,27,0.85)]"
+        className="bg-midnight-900 border border-midnight-700 rounded-xl shadow-2xl max-w-xl w-full p-6 relative text-vanilla-100 my-8"
       >
         {/* Close Button */}
         <button

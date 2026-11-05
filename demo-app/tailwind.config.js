@@ -4,28 +4,47 @@ export default {
   theme: {
     extend: {
       colors: {
+        obsidian: {
+          canvas: '#090A0F',
+          surface: '#0F1117',
+          panel: '#151821',
+          elevated: '#1C202C',
+          subtle: '#232838',
+          border: '#2C3246',
+        },
+        amber: {
+          brand: '#F59E0B',
+          hover: '#D97706',
+        },
+        ink: {
+          primary: '#F1F3F9',
+          secondary: '#8F99B0',
+          tertiary: '#555E75',
+          dim: '#3E4559',
+        },
+        // Mapped legacy tokens for seamless Obsidian & Amber aesthetic
         midnight: {
-          950: '#0B0D1B', // deep dark midnight canvas
-          900: '#10142A', // panel & nav surface
-          850: '#141A38', // column backdrop
-          800: '#192044', // card surface
-          750: '#202956', // card hover surface
-          700: '#2C3770', // primary border
-          600: '#3D4C9A', // focus & accent border
-          500: '#5364C7', // muted indigo
-          indigo: '#5E6CE7', // vivid brand midnight indigo
-          glow: '#7B88FF', // indigo light glow
+          950: '#090A0F', // deep matte obsidian canvas
+          900: '#0F1117', // surface panel
+          850: '#151821', // column backdrop
+          800: '#1C202C', // card surface
+          750: '#232838', // card hover surface
+          700: '#2C3246', // primary 1px border
+          600: '#3E4559', // subtle border
+          500: '#8F99B0', // secondary text
+          indigo: '#F59E0B', // industrial amber brand
+          glow: '#F59E0B',
         },
         vanilla: {
-          50: '#FFFDF8',  // ultra light vanilla
-          100: '#FDF8EC', // primary vanilla cream
-          200: '#F7EED5', // soft vanilla custard
-          300: '#EDE0BA', // warm vanilla
-          400: '#DECA97', // golden vanilla
-          500: '#C7B078', // antique vanilla
-          text: '#FDF8EC', // primary high-contrast text
-          muted: '#D5C9A9', // secondary subtle text
-          dim: '#9E947A',  // tertiary metadata
+          50: '#FFFFFF',
+          100: '#F1F3F9', // crisp primary ink
+          200: '#E2E8F0',
+          300: '#CBD5E1',
+          400: '#94A3B8',
+          500: '#64748B',
+          text: '#F1F3F9',
+          muted: '#8F99B0', // secondary ink
+          dim: '#555E75', // tertiary metadata
         },
       },
     },

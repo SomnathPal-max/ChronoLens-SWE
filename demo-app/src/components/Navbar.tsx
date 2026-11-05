@@ -22,21 +22,21 @@ export const Navbar: React.FC<NavbarProps> = ({ filters, onFilterChange }) => {
     { label: 'All', value: 'all', dot: 'bg-vanilla-muted' },
     { label: 'Urgent', value: 'urgent', dot: 'bg-rose-400' },
     { label: 'High', value: 'high', dot: 'bg-amber-400' },
-    { label: 'Medium', value: 'medium', dot: 'bg-midnight-glow' },
+    { label: 'Medium', value: 'medium', dot: 'bg-sky-400' },
     { label: 'Low', value: 'low', dot: 'bg-emerald-400' },
   ];
 
   return (
     <nav
       data-cl="navbar"
-      className="bg-midnight-950/95 backdrop-blur-md border-b border-midnight-700/80 text-vanilla-100 px-6 py-2.5 sticky top-0 shadow-lg z-[1000]"
+      className="bg-midnight-950 border-b border-midnight-700 text-vanilla-100 px-6 py-2.5 sticky top-0 z-[1000]"
       style={{ zIndex: 1000, position: 'sticky' }}
     >
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         {/* Brand & Search */}
         <div className="flex items-center gap-4 flex-1 min-w-[280px]">
           <div className="flex items-center gap-2 font-semibold text-sm tracking-tight text-vanilla-100">
-            <span className="w-2.5 h-2.5 rounded-full bg-midnight-indigo shadow-[0_0_8px_rgba(94,108,231,0.6)]"></span>
+            <span className="w-2.5 h-2.5 rounded-sm bg-amber-brand"></span>
             <span>ChronoLens Kanban</span>
           </div>
 
@@ -48,14 +48,14 @@ export const Navbar: React.FC<NavbarProps> = ({ filters, onFilterChange }) => {
               placeholder="Filter issues (title, key, tag)..."
               value={filters.search}
               onChange={(e) => onFilterChange({ ...filters, search: e.target.value })}
-              className="w-full pl-8 pr-3 py-1.5 bg-midnight-900 hover:bg-midnight-850 focus:bg-midnight-850 text-vanilla-100 placeholder-vanilla-dim text-xs rounded-lg border border-midnight-700/80 focus:border-midnight-indigo focus:outline-none transition-colors"
+              className="w-full pl-8 pr-3 py-1.5 bg-midnight-900 hover:bg-midnight-850 focus:bg-midnight-850 text-vanilla-100 placeholder-vanilla-dim text-xs rounded border border-midnight-700 focus:border-amber-brand focus:outline-none transition-colors font-mono"
             />
           </div>
         </div>
 
         {/* Priority Filter Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto py-1">
-          <span className="text-[11px] text-vanilla-dim flex items-center gap-1 mr-1">
+          <span className="text-[11px] text-vanilla-dim flex items-center gap-1 mr-1 font-mono">
             <FilterIcon size={11} /> Priority:
           </span>
           {priorities.map((p) => {
@@ -64,10 +64,10 @@ export const Navbar: React.FC<NavbarProps> = ({ filters, onFilterChange }) => {
               <button
                 key={p.value}
                 onClick={() => onFilterChange({ ...filters, priority: p.value })}
-                className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all border ${
+                className={`px-2 py-0.5 rounded text-xs font-medium transition-all border ${
                   isSelected
-                    ? 'bg-vanilla-100 text-midnight-950 border-vanilla-200 font-semibold shadow-[0_0_12px_rgba(253,248,236,0.2)]'
-                    : 'bg-midnight-900/80 text-vanilla-muted border-midnight-700/60 hover:bg-midnight-850 hover:text-vanilla-100'
+                    ? 'bg-amber-brand text-obsidian-canvas border-amber-brand font-semibold shadow-sm'
+                    : 'bg-midnight-900 text-vanilla-muted border-midnight-700 hover:bg-midnight-850 hover:text-vanilla-100'
                 }`}
               >
                 <span className={`inline-block w-1.5 h-1.5 rounded-full mr-1.5 ${p.dot}`} />

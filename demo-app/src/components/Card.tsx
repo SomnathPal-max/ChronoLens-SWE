@@ -9,20 +9,20 @@ interface CardProps {
 }
 
 const priorityConfig: Record<PriorityLevel, { label: string; badge: string; iconColor: string }> = {
-  urgent: { label: 'Urgent', badge: 'bg-rose-950/70 text-rose-200 border-rose-700/60', iconColor: 'text-rose-400' },
-  high: { label: 'High', badge: 'bg-amber-950/70 text-amber-200 border-amber-700/60', iconColor: 'text-amber-400' },
-  medium: { label: 'Medium', badge: 'bg-midnight-900 text-midnight-glow border-midnight-600/70', iconColor: 'text-midnight-glow' },
-  low: { label: 'Low', badge: 'bg-emerald-950/70 text-emerald-200 border-emerald-700/60', iconColor: 'text-emerald-400' },
+  urgent: { label: 'Urgent', badge: 'bg-rose-500/10 text-rose-400 border-rose-500/20', iconColor: 'text-rose-400' },
+  high: { label: 'High', badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20', iconColor: 'text-amber-400' },
+  medium: { label: 'Medium', badge: 'bg-sky-500/10 text-sky-400 border-sky-500/20', iconColor: 'text-sky-400' },
+  low: { label: 'Low', badge: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20', iconColor: 'text-emerald-400' },
 };
 
 const avatarColors: Record<string, string> = {
-  Alice: 'bg-midnight-indigo',
+  Alice: 'bg-amber-700',
   Bob: 'bg-emerald-700',
-  Carol: 'bg-purple-700',
-  Dave: 'bg-amber-700',
+  Carol: 'bg-indigo-700',
+  Dave: 'bg-stone-700',
   Eve: 'bg-rose-700',
   Frank: 'bg-cyan-700',
-  Grace: 'bg-pink-700',
+  Grace: 'bg-teal-700',
 };
 
 export const Card: React.FC<CardProps> = ({ card, onClick }) => {
@@ -49,12 +49,12 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onClick={() => onClick(card)}
-      className="bg-midnight-800/95 hover:bg-midnight-750 rounded-xl shadow-sm hover:shadow-xl border border-midnight-700 hover:border-midnight-600 p-3.5 cursor-grab active:cursor-grabbing transition-all select-none group"
+      className="bg-midnight-800 hover:bg-midnight-750 rounded-lg shadow-sm border border-midnight-700 hover:border-midnight-600 p-3.5 cursor-grab active:cursor-grabbing transition-all select-none group"
     >
       {/* Top Header: Issue Key, Priority & Due Date */}
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-1.5">
-          <span className="text-[11px] font-mono font-semibold text-vanilla-dim group-hover:text-midnight-glow transition-colors">
+          <span className="text-[11px] font-mono font-semibold text-vanilla-dim group-hover:text-amber-brand transition-colors">
             {card.key || card.id.toUpperCase()}
           </span>
           <span className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium border ${pConfig.badge}`}>

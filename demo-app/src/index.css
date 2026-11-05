@@ -7,28 +7,28 @@
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       'Helvetica Neue', Arial, sans-serif;
-    background-color: #0B0D1B;
-    color: #FDF8EC;
+    background-color: #090A0F;
+    color: #F1F3F9;
   }
 
   ::selection {
-    background-color: #5E6CE7;
-    color: #FFFDF8;
+    background-color: #F59E0B;
+    color: #090A0F;
   }
 
-  /* Custom Midnight Indigo Scrollbars */
+  /* Industrial Obsidian Scrollbars */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0B0D1B;
+    background: #090A0F;
   }
   ::-webkit-scrollbar-thumb {
-    background: #2C3770;
-    border-radius: 9999px;
+    background: #232838;
+    border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #5E6CE7;
+    background: #F59E0B;
   }
 }

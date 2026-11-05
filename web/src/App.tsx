@@ -113,7 +113,6 @@ export const App: React.FC = () => {
   const handleSelectSession = (id: string) => {
     setCurrentSessionId(id);
     setIsPlaying(false);
-    // Seek to first anomaly of that bug
     const newSession = sessions[id];
     if (newSession && newSession.anomalies.length > 0) {
       setCurrentTimestampMs(newSession.anomalies[0].t_start_ms);
@@ -123,7 +122,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0d14] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-obsidian-canvas text-ink-primary flex flex-col font-sans selection:bg-amber-500/20">
       {/* Header */}
       <Header
         currentSession={session}
@@ -134,10 +133,10 @@ export const App: React.FC = () => {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-[1700px] w-full mx-auto p-5 flex flex-col gap-5">
+      <main className="flex-1 max-w-[1700px] w-full mx-auto p-4 md:p-5 flex flex-col gap-5">
         {/* Top 2-Column Split: Video Viewport + Inspector Panel */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-          {/* Left Column: Synchronized Video Player (7 Cols) */}
+          {/* Left Column: Synchronized Video Player & Multi-Track Scrubber (7 Cols) */}
           <div className="lg:col-span-7 flex flex-col gap-4">
             <VideoPlayer
               session={session}
@@ -151,7 +150,7 @@ export const App: React.FC = () => {
               activeAnomalies={activeAnomalies}
             />
 
-            {/* Scrubber sits right below video for instant navigation */}
+            {/* Industrial Precision Timeline Scrubber */}
             <TimelineScrubber
               session={session}
               currentTimestampMs={currentTimestampMs}
@@ -162,72 +161,77 @@ export const App: React.FC = () => {
           </div>
 
           {/* Right Column: Multi-Tab Telemetry & Root Cause Inspector (5 Cols) */}
-          <div className="lg:col-span-5 bg-[#111622] rounded-2xl border border-slate-800/80 shadow-2xl flex flex-col overflow-hidden min-h-[580px]">
-            {/* Inspector Tab Bar */}
-            <div className="px-3 pt-3 bg-[#141b2d] border-b border-slate-800 flex items-center gap-1 overflow-x-auto">
+          <div className="lg:col-span-5 bg-obsidian-surface rounded-xl border border-obsidian-subtle shadow-xl flex flex-col overflow-hidden min-h-[580px]">
+            {/* Recessed Tab Bar */}
+            <div className="px-2.5 py-2 bg-obsidian-panel border-b border-obsidian-subtle flex items-center gap-1 overflow-x-auto">
               <button
                 onClick={() => setActiveTab('rootcause')}
-                className={`px-3 py-2 text-xs font-semibold rounded-t-lg transition-all flex items-center gap-1.5 border-b-2 ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${
                   activeTab === 'rootcause'
-                    ? 'border-indigo-500 text-indigo-400 bg-[#111622]'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                    ? 'bg-obsidian-elevated text-ink-primary border border-obsidian-border shadow-xs'
+                    : 'text-ink-tertiary hover:text-ink-secondary hover:bg-obsidian-surface border border-transparent'
                 }`}
               >
-                <FileCodeIcon size={14} />
+                <FileCodeIcon size={13} className={activeTab === 'rootcause' ? 'text-amber-brand' : 'text-ink-dim'} />
                 <span>Root Cause &amp; Patch</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('telemetry')}
-                className={`px-3 py-2 text-xs font-semibold rounded-t-lg transition-all flex items-center gap-1.5 border-b-2 ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${
                   activeTab === 'telemetry'
-                    ? 'border-sky-500 text-sky-400 bg-[#111622]'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                    ? 'bg-obsidian-elevated text-ink-primary border border-obsidian-border shadow-xs'
+                    : 'text-ink-tertiary hover:text-ink-secondary hover:bg-obsidian-surface border border-transparent'
                 }`}
               >
-                <ActivityIcon size={14} />
+                <ActivityIcon size={13} className={activeTab === 'telemetry' ? 'text-sky-400' : 'text-ink-dim'} />
                 <span>DOM Probe</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('network')}
-                className={`px-3 py-2 text-xs font-semibold rounded-t-lg transition-all flex items-center gap-1.5 border-b-2 ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${
                   activeTab === 'network'
-                    ? 'border-emerald-500 text-emerald-400 bg-[#111622]'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                    ? 'bg-obsidian-elevated text-ink-primary border border-obsidian-border shadow-xs'
+                    : 'text-ink-tertiary hover:text-ink-secondary hover:bg-obsidian-surface border border-transparent'
                 }`}
               >
-                <WifiIcon size={14} />
+                <WifiIcon size={13} className={activeTab === 'network' ? 'text-emerald-400' : 'text-ink-dim'} />
                 <span>HAR Network</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('anomalies')}
-                className={`px-3 py-2 text-xs font-semibold rounded-t-lg transition-all flex items-center gap-1.5 border-b-2 ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${
                   activeTab === 'anomalies'
-                    ? 'border-rose-500 text-rose-400 bg-[#111622]'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                    ? 'bg-obsidian-elevated text-ink-primary border border-obsidian-border shadow-xs'
+                    : 'text-ink-tertiary hover:text-ink-secondary hover:bg-obsidian-surface border border-transparent'
                 }`}
               >
-                <AlertTriangleIcon size={14} />
-                <span>Anomalies ({session.anomalies.length})</span>
+                <AlertTriangleIcon size={13} className={activeTab === 'anomalies' ? 'text-rose-400' : 'text-ink-dim'} />
+                <span>Anomalies</span>
+                <span className={`text-[10px] font-mono px-1 rounded ${
+                  session.anomalies.length > 0 ? 'bg-rose-950/60 text-rose-300 border border-rose-800/40' : 'bg-obsidian-panel text-ink-dim'
+                }`}>
+                  {session.anomalies.length}
+                </span>
               </button>
 
               <button
                 onClick={() => setActiveTab('pullrequest')}
-                className={`px-3 py-2 text-xs font-semibold rounded-t-lg transition-all flex items-center gap-1.5 border-b-2 ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${
                   activeTab === 'pullrequest'
-                    ? 'border-purple-500 text-purple-400 bg-[#111622]'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                    ? 'bg-obsidian-elevated text-ink-primary border border-obsidian-border shadow-xs'
+                    : 'text-ink-tertiary hover:text-ink-secondary hover:bg-obsidian-surface border border-transparent'
                 }`}
               >
-                <GitPullRequestIcon size={14} />
+                <GitPullRequestIcon size={13} className={activeTab === 'pullrequest' ? 'text-amber-brand' : 'text-ink-dim'} />
                 <span>PR Preview</span>
               </button>
             </div>
 
             {/* Inspector Tab Content */}
-            <div className="p-5 flex-1 overflow-y-auto max-h-[700px]">
+            <div className="p-4 flex-1 overflow-y-auto max-h-[700px] bg-obsidian-surface">
               {activeTab === 'rootcause' && (
                 <RootCauseTab
                   rootCause={session.root_cause}
@@ -271,17 +275,19 @@ export const App: React.FC = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-800/80 px-6 py-3.5 text-center text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2 max-w-[1700px] w-full mx-auto">
-        <div className="flex items-center gap-2">
-          <span>ChronoLens-SWE · Meta SAM 3.1 &amp; Muse Wonder Debugger</span>
-          <span>•</span>
-          <span className="text-slate-400">Rule 8 Guarded · 5/5 Multi-Run Verification</span>
+      {/* Industrial Monospace Footer */}
+      <footer className="border-t border-obsidian-subtle px-6 py-3 text-xs text-ink-tertiary flex flex-col md:flex-row items-center justify-between gap-2 max-w-[1700px] w-full mx-auto bg-obsidian-surface/40">
+        <div className="flex items-center gap-2 font-mono text-[11px]">
+          <span className="text-ink-secondary">CHRONOLENS-SWE</span>
+          <span className="text-ink-dim">/</span>
+          <span>META SAM 3.1 &amp; MUSE WONDER ENGINE</span>
+          <span className="text-ink-dim">/</span>
+          <span className="text-emerald-400">RULE 8 GUARDED · 5/5 GATE VERIFIED</span>
         </div>
-        <div className="flex items-center gap-3 text-[11px] font-mono">
-          <span>Keyboard: [Space] Play/Pause</span>
+        <div className="flex items-center gap-3 text-[11px] font-mono text-ink-dim">
+          <span>[SPACE] PLAY/PAUSE</span>
           <span>•</span>
-          <span>[← / →] Frame Step</span>
+          <span>[←/→] STEP FRAME</span>
         </div>
       </footer>
 

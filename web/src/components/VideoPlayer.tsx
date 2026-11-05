@@ -113,27 +113,27 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   return (
-    <div className="bg-[#111622] rounded-2xl border border-slate-800/80 shadow-2xl overflow-hidden flex flex-col">
-      {/* Top Video Toolbar: Stream status & Overlay Toggles */}
-      <div className="px-4 py-2.5 bg-[#141b2d] border-b border-slate-800 flex items-center justify-between text-xs">
+    <div className="bg-obsidian-surface rounded-xl border border-obsidian-subtle shadow-xl overflow-hidden flex flex-col">
+      {/* Top Video Toolbar */}
+      <div className="px-3.5 py-2 bg-obsidian-panel border-b border-obsidian-subtle flex items-center justify-between text-xs">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse" />
-          <span className="font-semibold text-slate-200">
-            {session.bug_title} · H.264 MP4 Stream
+          <span className="w-2 h-2 rounded-full bg-amber-brand" />
+          <span className="font-mono text-xs uppercase font-semibold text-ink-primary">
+            {session.bug_title}
           </span>
-          <span className="text-slate-500 text-[11px] font-mono">
-            ({session.fps} fps · {session.duration_s}s)
+          <span className="text-ink-tertiary text-[11px] font-mono">
+            ({session.fps} FPS · H.264 MP4)
           </span>
         </div>
 
-        {/* Layer Toggles */}
-        <div className="flex items-center gap-1.5">
+        {/* Technical Layer Toggles */}
+        <div className="flex items-center gap-1.5 font-mono text-[11px]">
           <button
             onClick={() => setShowSamMasks(!showSamMasks)}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-medium flex items-center gap-1 transition-colors ${
+            className={`px-2.5 py-1 rounded-md font-medium flex items-center gap-1.5 transition-colors ${
               showSamMasks
-                ? 'bg-indigo-600/20 text-indigo-300 border border-indigo-500/30'
-                : 'text-slate-500 hover:text-slate-300 bg-slate-800/40'
+                ? 'bg-amber-brand/15 text-amber-brand border border-amber-brand/30'
+                : 'text-ink-tertiary hover:text-ink-secondary bg-obsidian-canvas border border-obsidian-subtle'
             }`}
             title="Toggle Meta SAM 3.1 Segmentation Masks"
           >
@@ -143,28 +143,28 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
           <button
             onClick={() => setShowDomBoxes(!showDomBoxes)}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-medium flex items-center gap-1 transition-colors ${
+            className={`px-2.5 py-1 rounded-md font-medium flex items-center gap-1.5 transition-colors ${
               showDomBoxes
-                ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
-                : 'text-slate-500 hover:text-slate-300 bg-slate-800/40'
+                ? 'bg-sky-500/15 text-sky-400 border border-sky-500/30'
+                : 'text-ink-tertiary hover:text-ink-secondary bg-obsidian-canvas border border-obsidian-subtle'
             }`}
             title="Toggle DOM Probe Bounding Boxes"
           >
             <EyeIcon size={12} />
-            <span>DOM Probe</span>
+            <span>DOM PROBE</span>
           </button>
 
           <button
             onClick={() => setShowAnomalies(!showAnomalies)}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-medium flex items-center gap-1 transition-colors ${
+            className={`px-2.5 py-1 rounded-md font-medium flex items-center gap-1.5 transition-colors ${
               showAnomalies
-                ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
-                : 'text-slate-500 hover:text-slate-300 bg-slate-800/40'
+                ? 'bg-rose-500/15 text-rose-400 border border-rose-500/30'
+                : 'text-ink-tertiary hover:text-ink-secondary bg-obsidian-canvas border border-obsidian-subtle'
             }`}
             title="Toggle Anomaly Halos"
           >
             <AlertTriangleIcon size={12} />
-            <span>Anomalies</span>
+            <span>ANOMALIES</span>
           </button>
         </div>
       </div>
@@ -172,7 +172,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       {/* Video Viewport with Canvas Overlay */}
       <div
         ref={containerRef}
-        className="relative aspect-video bg-black/95 flex items-center justify-center overflow-hidden"
+        className="relative aspect-video bg-[#050608] flex items-center justify-center overflow-hidden select-none"
       >
         {session.video_url && !videoError ? (
           <video
@@ -186,21 +186,21 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
             className="w-full h-full object-contain"
           />
         ) : (
-          /* High-Fidelity Synthetic Simulation Viewport when video is offscreen or loading */
-          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-slate-900 via-[#0d131f] to-slate-950 p-6 text-center select-none">
-            <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center mb-3 text-indigo-400">
-              <LayersIcon size={32} />
+          /* High-Fidelity Synthetic Simulation Viewport */
+          <div className="w-full h-full flex flex-col items-center justify-center bg-obsidian-canvas p-6 text-center select-none border border-obsidian-subtle/40">
+            <div className="w-12 h-12 rounded-lg bg-obsidian-panel border border-obsidian-border flex items-center justify-center mb-2.5 text-amber-brand">
+              <LayersIcon size={24} />
             </div>
-            <h3 className="text-base font-semibold text-slate-200 mb-1">
-              {session.bug_title} (Synchronized Canvas)
+            <h3 className="text-sm font-semibold text-ink-primary font-mono mb-1">
+              {session.bug_title.toUpperCase()} (PERCEPTION VIEWPORT)
             </h3>
-            <p className="text-xs text-slate-400 max-w-md mb-3">
-              Stepping frame-by-frame with SAM 3.1 pixel masks and DOM probe telemetry.
+            <p className="text-xs text-ink-secondary max-w-md mb-2.5">
+              Synchronized frame-by-frame pipeline stepping with SAM 3.1 pixel masks and DOM telemetry.
             </p>
-            <div className="flex items-center gap-3 text-[11px] font-mono text-slate-500">
-              <span>Timestamp: {currentTimestampMs}ms</span>
+            <div className="flex items-center gap-3 text-[11px] font-mono text-ink-tertiary">
+              <span>T: {currentTimestampMs}ms</span>
               <span>•</span>
-              <span>Frame: {currentFrameIndex}</span>
+              <span>FRAME: {currentFrameIndex}</span>
             </div>
           </div>
         )}
@@ -218,67 +218,67 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
         {/* Active Anomaly Banner Overlay */}
         {activeAnomalies.length > 0 && showAnomalies && (
-          <div className="absolute top-3 left-3 z-30 flex items-center gap-2 px-3 py-1.5 bg-red-600/90 text-white rounded-lg backdrop-blur-md shadow-lg shadow-red-600/30 text-xs font-semibold animate-pulse border border-red-400/50">
-            <AlertTriangleIcon size={14} />
-            <span>ANOMALY DETECTED: {activeAnomalies[0].type.toUpperCase()}</span>
+          <div className="absolute top-3 left-3 z-30 flex items-center gap-2 px-2.5 py-1 bg-rose-950/90 text-rose-200 rounded border border-rose-600/70 shadow-lg text-[11px] font-mono font-semibold">
+            <AlertTriangleIcon size={13} className="text-rose-400" />
+            <span>ANOMALY: {activeAnomalies[0].type.toUpperCase()}</span>
           </div>
         )}
       </div>
 
-      {/* Control Bar */}
-      <div className="px-4 py-3 bg-[#111726] border-t border-slate-800 flex items-center justify-between gap-4">
+      {/* Control Transport Bar */}
+      <div className="px-3.5 py-2.5 bg-obsidian-panel border-t border-obsidian-subtle flex items-center justify-between gap-4">
         {/* Playback Buttons */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {/* Step Back -1 Frame */}
           <button
             onClick={() => onSeekMs(Math.max(0, currentTimestampMs - frameIntervalMs))}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+            className="p-1.5 text-ink-secondary hover:text-ink-primary hover:bg-obsidian-elevated rounded transition-colors"
             title="Step back 1 frame (-33ms)"
           >
-            <StepBackIcon size={16} />
+            <StepBackIcon size={15} />
           </button>
 
-          {/* Play / Pause */}
+          {/* Play / Pause (Crisp Amber) */}
           <button
             onClick={onTogglePlay}
-            className="w-9 h-9 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center transition-all shadow-md shadow-indigo-600/25 active:scale-95"
+            className="w-8 h-8 rounded-md bg-amber-brand hover:bg-amber-hover text-obsidian-canvas flex items-center justify-center transition-all shadow-sm active:scale-95"
             title={isPlaying ? 'Pause' : 'Play'}
           >
-            {isPlaying ? <PauseIcon size={16} /> : <PlayIcon size={16} />}
+            {isPlaying ? <PauseIcon size={14} className="fill-current" /> : <PlayIcon size={14} className="fill-current ml-0.5" />}
           </button>
 
           {/* Step Forward +1 Frame */}
           <button
             onClick={() => onSeekMs(Math.min(totalDurationMs, currentTimestampMs + frameIntervalMs))}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+            className="p-1.5 text-ink-secondary hover:text-ink-primary hover:bg-obsidian-elevated rounded transition-colors"
             title="Step forward 1 frame (+33ms)"
           >
-            <StepForwardIcon size={16} />
+            <StepForwardIcon size={15} />
           </button>
 
           {/* Time & Frame Counter */}
           <div className="ml-3 font-mono text-xs flex items-center gap-1.5">
-            <span className="text-slate-100 font-semibold">{formatTime(currentTimestampMs)}</span>
-            <span className="text-slate-500">/</span>
-            <span className="text-slate-500">{formatTime(totalDurationMs)}</span>
-            <span className="ml-2 px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-slate-400 border border-slate-700/50">
-              Frame {currentFrameIndex}
+            <span className="text-ink-primary font-semibold">{formatTime(currentTimestampMs)}</span>
+            <span className="text-ink-dim">/</span>
+            <span className="text-ink-tertiary">{formatTime(totalDurationMs)}</span>
+            <span className="ml-2 px-1.5 py-0.5 rounded bg-obsidian-canvas text-[10px] text-ink-tertiary border border-obsidian-subtle">
+              FRAME {currentFrameIndex}
             </span>
           </div>
         </div>
 
         {/* Speed Selector */}
         <div className="flex items-center gap-2 text-xs">
-          <span className="text-slate-400">Speed:</span>
-          <div className="flex items-center gap-1 bg-[#161e31] p-0.5 rounded-lg border border-slate-800">
+          <span className="text-ink-tertiary font-mono text-[11px]">RATE:</span>
+          <div className="flex items-center gap-0.5 bg-obsidian-canvas p-0.5 rounded border border-obsidian-subtle font-mono text-[11px]">
             {[0.25, 0.5, 1, 2].map((speed) => (
               <button
                 key={speed}
                 onClick={() => onChangeSpeed(speed)}
-                className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors ${
+                className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${
                   playbackSpeed === speed
-                    ? 'bg-indigo-600 text-white'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-obsidian-elevated text-ink-primary border border-obsidian-border shadow-xs'
+                    : 'text-ink-tertiary hover:text-ink-secondary'
                 }`}
               >
                 {speed}x

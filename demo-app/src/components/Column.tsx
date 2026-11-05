@@ -16,9 +16,9 @@ interface ColumnProps {
 }
 
 const columnMeta: Record<ColumnId, { dot: string; text: string; bg: string }> = {
-  todo: { dot: 'bg-midnight-glow', text: 'text-vanilla-100', bg: 'bg-midnight-indigo/20' },
-  inprogress: { dot: 'bg-amber-400', text: 'text-vanilla-100', bg: 'bg-amber-500/20' },
-  done: { dot: 'bg-emerald-400', text: 'text-vanilla-100', bg: 'bg-emerald-500/20' },
+  todo: { dot: 'bg-sky-400', text: 'text-vanilla-100', bg: 'bg-sky-500/10' },
+  inprogress: { dot: 'bg-amber-400', text: 'text-vanilla-100', bg: 'bg-amber-500/10' },
+  done: { dot: 'bg-emerald-400', text: 'text-vanilla-100', bg: 'bg-emerald-500/10' },
 };
 
 export const Column: React.FC<ColumnProps> = ({
@@ -85,21 +85,21 @@ export const Column: React.FC<ColumnProps> = ({
   return (
     <div
       data-cl={dataCl}
-      className={`flex flex-col bg-midnight-850/80 backdrop-blur-sm rounded-2xl border border-midnight-700/80 min-w-[300px] w-full max-w-sm transition-all duration-150 ${
-        isDragOver ? 'ring-2 ring-midnight-indigo bg-midnight-800/90' : ''
+      className={`flex flex-col bg-midnight-850 rounded-xl border border-midnight-700 min-w-[300px] w-full max-w-sm transition-all duration-150 ${
+        isDragOver ? 'ring-1 ring-amber-brand bg-midnight-800' : ''
       }`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       {/* Column Header */}
-      <div className="px-4 py-3.5 border-b border-midnight-700/80 flex items-center justify-between">
+      <div className="px-4 py-3.5 border-b border-midnight-700 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className={`w-2 h-2 rounded-full ${meta.dot} shadow-[0_0_6px_currentColor]`} />
+          <span className={`w-2 h-2 rounded-full ${meta.dot}`} />
           <h2 className={`font-semibold text-xs tracking-wider uppercase ${meta.text}`}>
             {title}
           </h2>
-          <span className="text-[11px] font-mono text-vanilla-muted bg-midnight-900 border border-midnight-700/60 px-2 py-0.5 rounded-full font-medium">
+          <span className="text-[11px] font-mono text-vanilla-muted bg-midnight-900 border border-midnight-700 px-2 py-0.5 rounded font-medium">
             {cards.length}
           </span>
         </div>
@@ -110,7 +110,7 @@ export const Column: React.FC<ColumnProps> = ({
             data-cl="add-card-btn"
             onClick={handleAddClick}
             style={addBtnStyle}
-            className="flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-vanilla-100 hover:bg-vanilla-50 text-midnight-950 border border-vanilla-200 shadow-[0_0_10px_rgba(253,248,236,0.15)] transition-all"
+            className="flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded bg-amber-brand hover:bg-amber-hover text-obsidian-canvas border border-amber-brand shadow-sm transition-all"
             title="Add a new card to To Do"
           >
             <PlusIcon size={12} />

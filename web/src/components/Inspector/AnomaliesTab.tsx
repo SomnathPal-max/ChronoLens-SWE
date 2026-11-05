@@ -14,23 +14,23 @@ export const AnomaliesTab: React.FC<AnomaliesTabProps> = ({
   onSeekMs,
 }) => {
   return (
-    <div className="flex flex-col gap-4 text-xs">
+    <div className="flex flex-col gap-3 text-xs font-sans">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1.5 text-slate-300 font-semibold">
-          <AlertTriangleIcon size={14} className="text-rose-400" />
+        <div className="flex items-center gap-1.5 text-ink-primary font-mono text-[11px] uppercase tracking-wider font-semibold">
+          <AlertTriangleIcon size={13} className="text-rose-400" />
           <span>Detected Visual Regression Anomalies ({anomalies.length})</span>
         </div>
-        <span className="text-slate-500 font-mono">
-          Thresholds: IoU &ge; 0.85 · Teleport &gt; 40px
+        <span className="text-ink-tertiary font-mono text-[11px]">
+          THRESHOLDS: IoU &ge; 0.85 · TELEPORT &gt; 40px
         </span>
       </div>
 
       {anomalies.length === 0 ? (
-        <div className="p-8 text-center text-slate-500 bg-[#141b2d] rounded-xl border border-slate-800">
+        <div className="p-8 text-center text-ink-tertiary bg-obsidian-panel rounded-lg border border-obsidian-subtle font-mono text-xs">
           No anomalies detected! Visual state verified clean.
         </div>
       ) : (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2.5">
           {anomalies.map((anom, idx) => {
             const isInside =
               currentTimestampMs >= anom.t_start_ms &&
@@ -39,43 +39,43 @@ export const AnomaliesTab: React.FC<AnomaliesTabProps> = ({
             return (
               <div
                 key={idx}
-                className={`bg-[#141b2d] rounded-xl border p-4 flex flex-col gap-2.5 transition-all ${
+                className={`bg-obsidian-panel rounded-lg border p-3 flex flex-col gap-2 transition-all ${
                   isInside
-                    ? 'border-rose-500 shadow-lg shadow-rose-500/10 ring-1 ring-rose-500/50'
-                    : 'border-slate-800 hover:border-slate-700'
+                    ? 'border-rose-500/80 shadow-xs ring-1 ring-rose-500/30'
+                    : 'border-obsidian-subtle hover:border-obsidian-border'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                    <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-rose-950/40 text-rose-300 border border-rose-800/40">
                       {anom.type}
                     </span>
-                    <span className="font-semibold text-slate-200">
+                    <span className="font-mono font-semibold text-ink-primary text-xs">
                       {anom.concept}
                     </span>
                   </div>
 
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-red-600 text-white">
+                  <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-rose-600 text-white">
                     {anom.severity}
                   </span>
                 </div>
 
-                <p className="text-slate-300 leading-relaxed">{anom.details}</p>
+                <p className="text-ink-secondary text-xs leading-relaxed">{anom.details}</p>
 
-                <div className="flex items-center justify-between pt-2 border-t border-slate-800/80 font-mono text-[11px] text-slate-400">
+                <div className="flex items-center justify-between pt-1.5 border-t border-obsidian-subtle font-mono text-[11px] text-ink-tertiary">
                   <div className="flex items-center gap-1.5">
-                    <ClockIcon size={12} />
+                    <ClockIcon size={11} />
                     <span>
-                      Window: {anom.t_start_ms}ms – {anom.t_end_ms}ms (Frame {anom.frame_index})
+                      {anom.t_start_ms}ms – {anom.t_end_ms}ms (FRAME {anom.frame_index})
                     </span>
                   </div>
 
                   <button
                     onClick={() => onSeekMs(anom.t_start_ms)}
-                    className="flex items-center gap-1 px-2.5 py-1 rounded bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 font-sans font-semibold text-xs transition-colors"
+                    className="flex items-center gap-1 px-2 py-0.5 rounded bg-amber-brand hover:bg-amber-hover text-obsidian-canvas font-mono font-semibold text-[10px] transition-colors"
                   >
-                    <PlayIcon size={11} />
-                    <span>Jump to Timestamp</span>
+                    <PlayIcon size={10} className="fill-current" />
+                    <span>SEEK TO FRAME</span>
                   </button>
                 </div>
               </div>

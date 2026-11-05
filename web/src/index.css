@@ -4,28 +4,28 @@
 
 @layer base {
   body {
-    @apply bg-[#0B0D1B] text-[#FDF8EC] antialiased;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    @apply bg-obsidian-canvas text-ink-primary antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'tnum';
   }
 
   ::selection {
-    background-color: #5E6CE7;
-    color: #FFFDF8;
+    background-color: rgba(245, 158, 11, 0.3);
+    color: #FFFFFF;
   }
 
-  /* Custom Midnight Indigo scrollbars */
+  /* Sleek Industrial Obsidian scrollbars */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
   }
   ::-webkit-scrollbar-track {
-    background: #0B0D1B;
+    background: #090A0F;
   }
   ::-webkit-scrollbar-thumb {
-    background: #252D5E;
-    border-radius: 9999px;
+    background: #232838;
+    border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #5E6CE7;
+    background: #3F4864;
   }
 }

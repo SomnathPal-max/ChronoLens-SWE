@@ -98,7 +98,7 @@ export const CanvasOverlay: React.FC<CanvasOverlayProps> = ({
       });
     }
 
-    // Render Anomaly Highlights (Vibrant pulsed red outline + danger flag)
+    // Render Anomaly Highlights (Crisp technical crimson boundary)
     if (showAnomalies && activeAnomalies && activeAnomalies.length > 0) {
       activeAnomalies.forEach((anom) => {
         if (!anom.bbox) return;
@@ -112,21 +112,35 @@ export const CanvasOverlay: React.FC<CanvasOverlayProps> = ({
         const h = (y2 - y1) * scaleY;
 
         ctx.save();
-        // Red glow
-        ctx.shadowColor = '#ef4444';
-        ctx.shadowBlur = 15;
+        // Crisp non-blurry technical border
         ctx.strokeStyle = '#ef4444';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x, y, w, h);
+
+        // Corner reticle accents
+        const cornerSize = Math.min(10, Math.min(w, h) / 3);
         ctx.lineWidth = 3;
-        ctx.strokeRect(x - 2, y - 2, w + 4, h + 4);
+        ctx.strokeStyle = '#f87171';
+        // Top-left
+        ctx.beginPath();
+        ctx.moveTo(x, y + cornerSize); ctx.lineTo(x, y); ctx.lineTo(x + cornerSize, y);
+        // Top-right
+        ctx.moveTo(x + w - cornerSize, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w, y + cornerSize);
+        // Bottom-left
+        ctx.beginPath();
+        ctx.moveTo(x, y + h - cornerSize); ctx.lineTo(x, y + h); ctx.lineTo(x + cornerSize, y + h);
+        // Bottom-right
+        ctx.moveTo(x + w - cornerSize, y + h); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w, y + h - cornerSize);
+        ctx.stroke();
 
         // Anomaly badge
-        ctx.font = 'bold 11px ui-sans-serif, system-ui';
+        ctx.font = 'bold 10px ui-monospace, SFMono-Regular, Menlo, monospace';
         ctx.fillStyle = '#dc2626';
-        const text = `⚠️ ANOMALY: ${anom.type.toUpperCase()}`;
+        const text = `ANOMALY: ${anom.type.toUpperCase()}`;
         const textWidth = ctx.measureText(text).width;
-        ctx.fillRect(x, Math.max(0, y - 22), textWidth + 12, 20);
+        ctx.fillRect(x, Math.max(0, y - 20), textWidth + 12, 18);
         ctx.fillStyle = '#ffffff';
-        ctx.fillText(text, x + 6, Math.max(14, y - 7));
+        ctx.fillText(text, x + 6, Math.max(13, y - 6));
         ctx.restore();
       });
     }
