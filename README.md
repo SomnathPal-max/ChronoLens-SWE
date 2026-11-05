@@ -2,7 +2,6 @@
 
 > **ChronoLens-SWE** watches a broken UI the way a human does, frame by frame. It measures visual changes using Meta SAM 3.1 pixel masks, reproduces bugs deterministically in a headless browser, synthesizes fixes with Muse Wonder 1.0 in isolated git worktrees, and verifies the fix with multi-run stability gates.
 
-Built for the **Meta Global AI Developer Hackathon** · Theme 1: Build for Your World · Indie track
 
 ---
 
